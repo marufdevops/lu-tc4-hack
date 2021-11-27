@@ -12,6 +12,9 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a seller name"],
     },
+    sellerAccountType: {
+      type: String,
+    },
     productName: {
       type: String,
       required: [true, "Please provide a product name"],

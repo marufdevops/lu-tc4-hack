@@ -1,6 +1,7 @@
 const Seller = require("../models/sellerModel");
 const catchAsync = require("../utils/catchAsync");
 const multermiddleware = require("../middlewares/multermiddleware");
+const Product = require("../models/productModel");
 
 //Find All Sellers
 exports.getAllSellers = async (req, res, next) => {
@@ -61,6 +62,31 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
     status: "success",
     data: {
       user: updatedUser,
+    },
+  });
+});
+
+exports.upgradeToPremium = catchAsync(async (req, res, next) => {
+  await Seller.findByIdAndUpdate(req.user.id, {
+    $set: { accountType: "premium" },
+  });
+  res.status(200).json({
+    status: "upgraded to premium",
+  });
+});
+
+exports.featuredSellers = catchAsync(async (req, res, next) => {
+  //data aggregation for featured products
+  const featured = await Product.aggregate([
+    {
+      $match: { sellerAccountType: "premium" },
+    },
+  ]);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      featured,
     },
   });
 });

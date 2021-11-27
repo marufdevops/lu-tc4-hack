@@ -90,6 +90,7 @@ exports.bidAProduct = catchAsync(async (req, res, next) => {
     product._id,
     {
       [option]: { allBids: req.user.id },
+      $set: { maxBid: req.body.bid },
     },
     { new: true }
   );
