@@ -4,6 +4,7 @@ const Seller = require("../models/sellerModel");
 const ApproveSeller = require("../models/approveSellerModel");
 const Customer = require("../models/customerModel");
 const ApproveCustomer = require("../models/approveCustomerModel");
+const multermiddleware = require("../middlewares/multermiddleware");
 const AppError = require("../utils/AppError.js");
 const catchAsync = require("../utils/catchAsync");
 
@@ -127,3 +128,23 @@ exports.login = catchAsync(async (req, res, next) => {
 const generateToken = (user) => {
   return jwt.sign(user, process.env.ACCESSKEY, { expiresIn: "60d" });
 };
+
+// //Multer middleware
+// exports.uploadUserPhoto = multermiddleware.multerFunc("users-nid").single("photo");
+
+// exports.verification = catchAsync(async (req, res, next) => {
+
+//     const {nid,photo}=req.body
+
+//     const approve = await Seller.findByIdAndUpdate(req.user.id, {
+//         nid,
+
+//       });
+//       if (!approve) {
+//         return next(new AppError("No approval document with that id", 404));
+//       }
+
+//       res.status(200).json({
+//         message: "pending for approval",
+//       });
+//     });

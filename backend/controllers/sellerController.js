@@ -1,5 +1,6 @@
 const Seller = require("../models/sellerModel");
 const catchAsync = require("../utils/catchAsync");
+const multermiddleware = require("../middlewares/multermiddleware");
 
 //Find All Sellers
 exports.getAllSellers = async (req, res, next) => {
@@ -33,6 +34,7 @@ const filterObj = (obj, ...allowedFields) => {
   });
   return newObj;
 };
+
 exports.updateProfileInfo = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(
     req.body,
