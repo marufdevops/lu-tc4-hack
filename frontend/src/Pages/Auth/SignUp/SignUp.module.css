@@ -31,7 +31,7 @@
     margin-top: 0px !important;
     margin-bottom: 0px !important;
     text-align: center;
-    color: #86d382;
+    color: skyblue;
   }
   
   .textField {
@@ -49,9 +49,9 @@
     padding: 7px 20px 7px 20px !important;
     font-family: "Poppins" !important;
     font-size: 18px !important;
-    background-color: #86d382 !important;
+    background-color: skyblue !important;
   }
   
   .loginLink {
-    color: #86d382;
+    color: skyblue;
   }
