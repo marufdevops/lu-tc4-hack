@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 //Schema Creation
-const sellerSchema = new mongoose.Schema(
+const approveSellerSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
@@ -30,15 +30,7 @@ const sellerSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a password"],
     },
-    accountType: {
-      type: String,
-      default: "free",
-    },
     photo: String,
-    selling_points: {
-      type: Number,
-      default: 0,
-    },
     approved: {
       type: Boolean,
       default: 0,
@@ -50,13 +42,7 @@ const sellerSchema = new mongoose.Schema(
   }
 );
 
-//virtual populate for appointments
-sellerSchema.virtual("products", {
-  ref: "Product",
-  foreignField: "_sellerId",
-  localField: "_id",
-});
 //Model Creation
-const Seller = mongoose.model("Seller", sellerSchema);
+const ApproveSeller = mongoose.model("ApproveSeller", approveSellerSchema);
 
-module.exports = Seller;
+module.exports = ApproveSeller;

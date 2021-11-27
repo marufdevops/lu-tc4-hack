@@ -1,5 +1,6 @@
 const Seller = require("../models/sellerModel");
 const catchAsync = require("../utils/catchAsync");
+const multermiddleware = require("../middlewares/multermiddleware");
 
 //Find All Sellers
 exports.getAllSellers = async (req, res, next) => {
@@ -14,13 +15,16 @@ exports.getAllSellers = async (req, res, next) => {
 };
 
 //Find A single Customer
-exports.getACustomer = catchAsync(async (req, res, next) => {
-  const customer = await Customer.findById(req.user.id);
+exports.getASeller = catchAsync(async (req, res, next) => {
+  const seller = await Seller.findById(req.user.id).populate({
+    path: "products",
+    select: "productName startingBid",
+  });
 
   res.status(200).json({
     message: "successful",
     data: {
-      customer,
+      seller,
     },
   });
 });
@@ -33,6 +37,7 @@ const filterObj = (obj, ...allowedFields) => {
   });
   return newObj;
 };
+
 exports.updateProfileInfo = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(
     req.body,

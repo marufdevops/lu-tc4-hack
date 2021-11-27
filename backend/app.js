@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const userRouter = require("./routes/userRoutes");
-const productRouter = require("./routes/productRoutes")
+const approvalRouter = require("./routes/approvalRoutes");
+const productRouter = require("./routes/productRoutes");
 const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 
@@ -19,6 +20,7 @@ app.use(
 
 //REST Architecture
 app.use("/api/users", userRouter);
+app.use("/api/approvals", approvalRouter);
 app.use("/api/products", productRouter);
 
 //Error Handling for all undefined routes
