@@ -7,43 +7,54 @@ import axios from '../../../Helper/axios'
 import Cookies from 'universal-cookie';
 import { useHistory } from "react-router-dom"
 const cookies = new Cookies()
+
+const getBase64 = (file, cb) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
 const Verification = () => {
     const [nid, setNid] = useState("")
-    const [nidFront,setNidFront]=useState("")
-    const [nidBack,setNidBack]=useState("")
+    const [nidFront, setNidFront] = useState("")
+    const [nidBack, setNidBack] = useState("")
     const formRef = React.useRef();
-    const handleChange = (event, type) => {
+    const handleChange = async (event, type) => {
         switch (type) {
             case "nationalIdNumber":
                 setNid(event.target.value)
                 break
             case "nidBack":
-                setNidBack(event.target.files[0])
+                setNidBack(await getBase64(event.target.files[0]))
                 break;
             case "nidFront":
-                setNidFront(event.target.files[0])
+                setNidFront(await getBase64(event.target.files[0]))
                 break;
             default:
                 break;
         }
     }
 
-    useEffect(() => {
-        console.log(nidFront);
-    }, [nidFront])
-    useEffect(() => {
-        console.log(nidBack);
+    useEffect(async () => {
+        console.log(nidBack)
     }, [nidBack])
 
+    useEffect(async () => {
+        console.log(nidFront)
+    }, [nidFront])
+
     const submit = () => {
-        const formData = new FormData()
-        const images=[nidFront,nidBack]
-        images.forEach(file => {
-            formData.append("files",file)
-        });
-        axios.post("https://v2.convertapi.com/upload",formData)
+        const body={
+            nid,
+        }
+        console.log(body);
+        axios.patch("api/users/customers/updateProfileInfo",body)
             .then(res=>{
                 console.log(res);
+            }).catch(err=>{
+                console.log(err);
             })
     }
     return (
@@ -64,7 +75,7 @@ const Verification = () => {
                             onChange={(event) => { handleChange(event, "nidFront") }}
                         />
                     </Button>
-                    <Button style={{margin:'10px'}}
+                    <Button style={{ margin: '10px' }}
                         variant="contained"
                         component="label"
                     >

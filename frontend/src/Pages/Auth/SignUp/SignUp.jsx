@@ -59,21 +59,14 @@ const SignUp = () => {
           password
         }
         console.log(body);
-        //   console.log(body);
-        // if (body.role === "customer") {
-        //     axios.post("/api/users/signup", body)
-        //         .then(res => {
-        //             cookies.set("assistc", res.data.accessToken)
-        //             cookies.set("assistr", "consumer")
-        //             history.push("/home");
-        //         }).catch(err => {
-        //             console.log(err);
-        //         })
-        // }
-        // else {
-        //     setUser(body)
-        //     history.push("/verification");
-        // }
+        axios.post("/api/users/signUp",body)
+          .then(res=>{
+            cookies.set("bargainc",res.data.accessToken)
+            cookies.set("bargainr",res.data.role)
+            history.push("/home");
+          }).catch(err=>{
+            console.log(err);
+          })
       } else {
         console.log("wrong password");
       }

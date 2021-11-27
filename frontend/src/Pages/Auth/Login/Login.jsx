@@ -37,15 +37,15 @@ const Login = () => {
         password
       }
       console.log(body);
-    //   axios.post("/api/users/login", body)
-    //     .then(res => {
-    //       cookies.set("bargainc", res.data.accessToken)
-    //       cookies.set("bargainr", body.role)
-    //       history.push("/home");
-    //     }).catch(err => {
-    //       alert('Incorrect Password!')
-    //       console.log(err);
-    //     })
+      axios.post("/api/users/login", body)
+        .then(res => {
+          cookies.set("bargainc", res.data.accessToken)
+          cookies.set("bargainr", body.role)
+          history.push("/home");
+        }).catch(err => {
+          alert('Incorrect Password!')
+          console.log(err);
+        })
     }
 
   }
