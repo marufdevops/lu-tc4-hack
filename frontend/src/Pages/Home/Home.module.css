@@ -70,10 +70,12 @@ p {
 }
 
 .categories {
+  width: 80%;
+  margin: auto;
   display: flex;
   flex-direction: row;
   flex-flow: row wrap;
-  gap: 90px;
+  gap: 50px;
   justify-content: center;
 }
 .categoryImage {
@@ -93,18 +95,18 @@ p {
   padding: 30px;
   box-shadow: 0.5px 0.5px 0.5px #ccc;
 }
-.categories>div:hover{
-    cursor: pointer;
+.categories > div:hover {
+  cursor: pointer;
 }
 
-.categories>div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.categories > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.categoriesHeaderText{
-    text-align: center;
-    margin-top: 80px;
+.categoriesHeaderText {
+  text-align: center;
+  margin-top: 80px;
 }
