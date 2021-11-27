@@ -12,11 +12,7 @@ app.use(express.static("img/products"));
 
 // Cross-Origin Resource Sharing middleware
 app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "PATCH"],
-    credentials: true,
-  })
+  cors('*')
 );
 
 //REST Architecture

@@ -34,24 +34,10 @@ exports.signUser = catchAsync(async (req, res, next) => {
         email,
         password: hash,
       });
-      ApproveSeller.create({
-        firstName,
-        lastName,
-        phone,
-        email,
-        password: hash,
-      });
     }
   } else if (role === "customer") {
     if ((await (await Customer.find({ email: email })).length) == 0) {
       newUser = new Customer({
-        firstName,
-        lastName,
-        phone,
-        email,
-        password: hash,
-      });
-      ApproveCustomer.create({
         firstName,
         lastName,
         phone,
