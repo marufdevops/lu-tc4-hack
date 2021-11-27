@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Seller = require("../models/sellerModel");
+const Customer = require("../models/customerModel")
 
 let refreshTokens = [];
 
@@ -48,6 +49,16 @@ exports.signUser = async (req, res, next) => {
     });
   }
 
+  if ((await (await Customer.find({ email: email })).length) == 0) {
+    newUser = new Customer({
+      firstName,
+      lastName,
+      phone,
+      email,
+      password: hash,
+    });
+  }
+
   //Logging in new User
   if (newUser) {
     const userId = {
@@ -78,8 +89,8 @@ exports.login = async (req, res, next) => {
   // }
   //Check whether email matches
   let user;
-  if (role === "consumer" || role === "admin") {
-    user = await Consumer.find({ email: email });
+  if (role === "customer" || role === "admin") {
+    user = await Customer.find({ email: email });
   } else if (role === "seller") {
     user = await Seller.find({ email: email });
   }
