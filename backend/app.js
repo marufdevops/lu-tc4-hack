@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Cross-Origin Resource Sharing middleware
 app.use(
-  cors()
+  cors('*')
 );
 
 //REST Architecture
