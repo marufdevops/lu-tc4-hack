@@ -42,6 +42,7 @@ const sellerSchema = new mongoose.Schema(
 
     max: {
       type: Number,
+    },
 
     confirmed:{
       type: Boolean,
