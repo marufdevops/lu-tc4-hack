@@ -8,6 +8,9 @@ const bidSchema = new mongoose.Schema(
       ref: "Seller",
       required: [true, "A product must have a seller"],
     },
+    sellerName: {
+      type: String,
+    },
     _productId: {
       type: mongoose.Schema.ObjectId,
       ref: "Product",
