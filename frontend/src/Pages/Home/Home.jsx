@@ -15,6 +15,7 @@ import healthImg from './6.png'
 import booksImg from './7.png'
 import homeImg from './8.png'
 import ps5 from './ps5.jpg'
+
 const Home = () => {
   let history = useHistory()
   const cardClickHandler = (product) => {
@@ -27,25 +28,29 @@ const Home = () => {
   return (
     <div>
       <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} />
-      <ul className={styles.categories}>
+      {/* <ul className={styles.categories}>
         <li>Browse By Category</li>
         <li>Electronics</li>
         <li>Kitchen Utensils</li>
         <li>Household Items</li>
       </ul>
-      <hr style={{ borderTop: '1px solid #40B8E5' }}></hr>
+      <hr style={{ borderTop: '1px solid #40B8E5' }}></hr> */}
       <div className={styles.searchDiv}>
-        Search For Product
+
         <div className={styles.searchInputDiv}>
-          <input className={styles.searchInput} />
-          <SearchOutlinedIcon fontSize='large' />
+          <input className={styles.searchInput} placeholder="Search For Products" />
+          <div className={styles.searchIcon}>
+            <SearchOutlinedIcon fontSize='large' />
+          </div>
+
         </div>
       </div>
+      <p className={styles.categoriesHeaderText}> Featured Listings </p>
       <div className={styles.products}>
         <Card onClick={() => { cardClickHandler("ps5") }} className={styles.homeCard} variant="outlined">
           <img className={styles.productImage} src={ps5}></img>
-          <p>Play Station 5</p>
-          <p>Current Bid : $380</p>
+          <p className={styles.featuredProductName}>Play Station 5</p>
+          <p className={styles.featuredProductBid}>Current Bid : $380</p>
         </Card>
         <Card className={styles.homeCard} variant="outlined">
           <img className={styles.productImage} src={ps5}></img>
@@ -80,7 +85,7 @@ const Home = () => {
           <Card className={styles.categoryCard} variant="outlined">
             <img className={styles.categoryImage} src={electronicsImg}></img>
 
-          </Card><p style={{ textAlign: 'center' }}>Electronics & Accessories</p>
+          </Card><p style={{ textAlign: 'center' }}>Electronics </p>
         </div>
         <div onClick={() => { categoryClickHandler("collectibles-art") }}>
           <Card className={styles.categoryCard} variant="outlined">
