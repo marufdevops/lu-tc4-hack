@@ -36,6 +36,7 @@ exports.getAProduct = catchAsync(async (req, res, next) => {
     data: {
       product,
       seller,
+      userId:req.user.id
     },
   });
 });
