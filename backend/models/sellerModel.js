@@ -35,6 +35,10 @@ const sellerSchema = new mongoose.Schema(
       default: "free",
     },
     photo: String,
+    selling_points: {
+      type: Number,
+      default: 0,
+    },
     approved: {
       type: Boolean,
       default: 0,
@@ -46,6 +50,12 @@ const sellerSchema = new mongoose.Schema(
   }
 );
 
+//virtual populate for appointments
+sellerSchema.virtual("products", {
+  ref: "Product",
+  foreignField: "_sellerId",
+  localField: "_id",
+});
 //Model Creation
 const Seller = mongoose.model("Seller", sellerSchema);
 

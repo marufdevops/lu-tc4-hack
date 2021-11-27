@@ -17,23 +17,20 @@ const productSchema = new mongoose.Schema(
       required: [true, "Please select a category"],
     },
     startingBid: {
-      type: Number,
-      unique: true,
+      type: String,
       required: [true, "Please enter a lowest bid amount"],
     },
     auctionDeadline: {
-      type: String,
+      type: Date,
       required: [true, "Please provide a deadline for the auction"],
     },
 
     winningCriteria: {
       type: String,
-      required: [true],
       default: "automatic",
     },
     winningCondition: {
       type: String,
-      required: [true],
       default: "highestBidder",
     },
     photos: [String],
