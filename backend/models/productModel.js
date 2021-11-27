@@ -29,12 +29,12 @@ const productSchema = new mongoose.Schema(
     winningCriteria: {
       type: String,
       required: [true],
-      default: "automatic"
+      default: "automatic",
     },
     winningCondition: {
       type: String,
       required: [true],
-      default: "highestBidder"
+      default: "highestBidder",
     },
     photos: [String],
   },
