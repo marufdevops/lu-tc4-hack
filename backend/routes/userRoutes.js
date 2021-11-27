@@ -16,6 +16,8 @@ router.use(authmiddlewares.protectRoute);
 //Seller Routes
 router.route("/sellers").get(sellerController.getAllSellers);
 router.route("/sellers/:id").get(sellerController.getASeller);
+router.route("/sellers/upgrade").patch(sellerController.upgradeToPremium);
+router.route("/featured").get(sellerController.featuredSellers);
 router.patch("/sellers/updateProfileInfo", sellerController.updateProfileInfo);
 
 //Customer Routes

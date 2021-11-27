@@ -1,8 +1,19 @@
 const catchAsync = require("../utils/catchAsync");
 const Product = require("../models/productModel");
 const Customer = require("../models/customerModel");
-const { lte } = require("lodash");
 const Seller = require("../models/sellerModel");
+const AppError = require("../utils/AppError");
+const schedule = require("node-schedule");
+
+schedule.scheduleJob("0 0 1 * *", async () => {
+  await Seller.updateMany(
+    { accountType: "free" },
+    {
+      $set: { max: 0 },
+    }
+  );
+  console.log("new month");
+});
 
 //Get All the products
 exports.getAllProducts = catchAsync(async (req, res, next) => {
@@ -42,10 +53,25 @@ exports.getAProduct = catchAsync(async (req, res, next) => {
 
 //Create a new product
 exports.createAProduct = catchAsync(async (req, res, next) => {
+  const seller = await Seller.findById(req.user.id);
+  if (seller.accountType === "free") {
+    if (seller.max >= 10) {
+      return next(
+        new AppError("you have exceeded your limit for this month", 400)
+      );
+    }
+  }
+
+  const curMax = seller.max + 1;
+  const sellerx = await Seller.findByIdAndUpdate(req.user.id, {
+    $set: { max: curMax },
+  });
+
   const newProduct = await Product.create({
     ...req.body,
     _sellerId: req.user.id,
-    photo: req.file ? req.file.filename : "productDefault.png",
+    sellerAccountType: seller.accountType,
+    photo: req.file ? req.file.filename : "productDefault.jpg",
   });
   res.status(201).json({
     message: "successful",
