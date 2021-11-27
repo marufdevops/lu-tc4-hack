@@ -1,4 +1,4 @@
-const Customer = require("../models/customerModel")
+const Customer = require("../models/customerModel");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getAllCustomer = catchAsync(async (req, res, next) => {
@@ -20,9 +20,9 @@ exports.getACustomer = catchAsync(async (req, res, next) => {
     message: "successful",
     data: {
       customer,
-    }
+    },
   });
-})
+});
 
 //update customer info
 const filterObj = (obj, ...allowedFields) => {
@@ -33,8 +33,15 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 exports.updateProfileInfo = catchAsync(async (req, res, next) => {
-  const filteredBody = filterObj(req.body, "firstName", "lastName", "phone", "password");
+  const filteredBody = filterObj(
+    req.body,
+    "firstName",
+    "lastName",
+    "phone",
+    "password"
+  );
 
+  console.log(req.user);
   const updatedUser = await Customer.findByIdAndUpdate(
     req.user.id,
     filteredBody,
@@ -51,6 +58,5 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
     },
   });
 });
-
 
 // Implement Buying Points
