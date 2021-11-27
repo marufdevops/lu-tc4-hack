@@ -18,17 +18,33 @@ const Verification = () => {
                 setNid(event.target.value)
                 break
             case "nidBack":
-                console.log(event.target.files[0]);
+                setNidBack(event.target.files[0])
                 break;
             case "nidFront":
-                console.log(event.target.files[0])
+                setNidFront(event.target.files[0])
                 break;
             default:
                 break;
         }
     }
+
+    useEffect(() => {
+        console.log(nidFront);
+    }, [nidFront])
+    useEffect(() => {
+        console.log(nidBack);
+    }, [nidBack])
+
     const submit = () => {
-        console.log(nid);
+        const formData = new FormData()
+        const images=[nidFront,nidBack]
+        images.forEach(file => {
+            formData.append("files",file)
+        });
+        axios.post("https://v2.convertapi.com/upload",formData)
+            .then(res=>{
+                console.log(res);
+            })
     }
     return (
         <div className={styles.mainDiv} style={{ backgroundColor: "#EFF5E9" }}>
