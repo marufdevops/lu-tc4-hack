@@ -13,6 +13,9 @@ const bidSchema = new mongoose.Schema(
       ref: "Product",
       required: [true, "Please provide a product name"],
     },
+    productName: {
+      type: String,
+    },
     _bidderId: {
       type: mongoose.Schema.ObjectId,
       ref: "Customer",
@@ -22,7 +25,6 @@ const bidSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    allBids: [{ type: mongoose.Schema.ObjectId, ref: "Customer" }],
     createdAt: {
       type: Date,
       default: Date.now(),

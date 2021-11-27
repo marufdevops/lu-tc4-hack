@@ -19,7 +19,7 @@ exports.getAllCustomer = catchAsync(async (req, res, next) => {
 exports.getACustomer = catchAsync(async (req, res, next) => {
   const customer = await Customer.findById(req.user.id).populate({
     path: "bids",
-    select: "bid _productId _sellerId",
+    select: "bid _productId _sellerId productName",
   });
 
   res.status(200).json({
@@ -89,6 +89,7 @@ exports.bidAProduct = catchAsync(async (req, res, next) => {
     _sellerId: product._sellerId,
     _bidderId: req.user.id,
     _productId: product._id,
+    productName: product.productName,
     bid: req.body.bid,
   });
   res.status(201).json({
