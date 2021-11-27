@@ -1,6 +1,7 @@
 const express = require("express");
 const authmiddlewares = require("../middlewares/authMiddleware");
 const approvalController = require("../controllers/approvalController");
+const emailController = require("../controllers/emailController");
 
 const router = express.Router();
 
@@ -13,5 +14,7 @@ router.route("/sellers").get(approvalController.pendingSellerApprovals);
 
 //Customer approval routes
 router.route("/customers").get(approvalController.pendingCustomerApprovals);
+
+router.route("/email").post(emailController.sendEmail);
 
 module.exports = router;

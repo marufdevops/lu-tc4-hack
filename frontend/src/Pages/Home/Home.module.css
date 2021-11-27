@@ -79,20 +79,20 @@ p {
   justify-content: center;
 }
 .categoryImage {
-  border-radius: 50%;
+  border-radius: 50% !important;
   width: 70%;
   height: 60%;
 }
 .categoryCard {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50% !important;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-bottom: 5px;
-  padding: 30px;
+  padding: 20px;
   box-shadow: 0.5px 0.5px 0.5px #ccc;
 }
 .categories > div:hover {

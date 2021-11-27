@@ -28,9 +28,21 @@ const customerSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a password"],
     },
+    buyer_points: {
+      type: Number,
+      default: 0,
+    },
     accountType: {
       type: String,
       default: "free",
+    },
+    confirmed: {
+      type: Boolean,
+      default: 0,
+    },
+    approved: {
+      type: Boolean,
+      default: 0,
     },
     photo: String,
   },

@@ -6,13 +6,21 @@ import Topbar from '../../Components/Topbar/Topbar'
 import styles from './Home.module.css';
 import axios from '../../Helper/axios'
 import { useHistory } from 'react-router';
+import electronicsImg from './1.png'
+import collectiblesImg from './2.png'
+import toysImg from './3.png'
+import fashionImg from './4.png'
+import sportingGoodsImg from './5.png'
+import healthImg from './6.png'
+import booksImg from './7.png'
+import homeImg from './8.png'
 import ps5 from './ps5.jpg'
 const Home = () => {
   let history = useHistory()
   const cardClickHandler = (product) => {
     history.push(`/product/${product}`)
   }
-  const categoryClickHandler=(category)=>{
+  const categoryClickHandler = (category) => {
     history.push(`/category/${category}`)
   }
 
@@ -68,48 +76,48 @@ const Home = () => {
 
       <p className={styles.categoriesHeaderText}> Search By Popular Categories </p>
       <div className={styles.categories}>
-        <div onClick={()=>{categoryClickHandler("electronics-accessories")}}>
-        <Card className={styles.categoryCard} variant="outlined">
-          <img className={styles.categoryImage} src={ps5}></img>
-          
-        </Card><p style={{textAlign:'center'}}>Electronics & Accessories</p>
+        <div onClick={() => { categoryClickHandler("electronics-accessories") }}>
+          <Card className={styles.categoryCard} variant="outlined">
+            <img className={styles.categoryImage} src={electronicsImg}></img>
+
+          </Card><p style={{ textAlign: 'center' }}>Electronics & Accessories</p>
         </div>
-        <div onClick={()=>{categoryClickHandler("collectibles-art")}}>
-        <Card className={styles.categoryCard} variant="outlined">
-          <img className={styles.categoryImage} src={ps5}></img>
-          
-        </Card><p>Collectibles & Art</p>
+        <div onClick={() => { categoryClickHandler("collectibles-art") }}>
+          <Card className={styles.categoryCard} variant="outlined">
+            <img className={styles.categoryImage} src={collectiblesImg}></img>
+
+          </Card><p>Collectibles & Art</p>
         </div>
-        <div onClick={()=>{categoryClickHandler("toys-hobbies")}}>
-        <Card className={styles.categoryCard} variant="outlined">
-          <img className={styles.categoryImage} src={ps5}></img>
-          
-        </Card><p>Toys & Hobbies</p>
+        <div onClick={() => { categoryClickHandler("toys-hobbies") }}>
+          <Card className={styles.categoryCard} variant="outlined">
+            <img className={styles.categoryImage} src={toysImg}></img>
+
+          </Card><p>Toys & Hobbies</p>
         </div>
-        <div onClick={()=>{categoryClickHandler("fashion")}}>
-        <Card className={styles.categoryCard} variant="outlined">
-          <img className={styles.categoryImage} src={ps5}></img>
-        </Card><p>Fashion</p>
+        <div onClick={() => { categoryClickHandler("fashion") }}>
+          <Card className={styles.categoryCard} variant="outlined">
+            <img className={styles.categoryImage} src={fashionImg}></img>
+          </Card><p>Fashion</p>
         </div>
-        <div onClick={()=>{categoryClickHandler("sportingGoods")}}>
-        <Card className={styles.categoryCard} variant="outlined">
-          <img className={styles.categoryImage} src={ps5}></img>
-        </Card><p>Sporting Goods</p>
+        <div onClick={() => { categoryClickHandler("sportingGoods") }}>
+          <Card className={styles.categoryCard} variant="outlined">
+            <img className={styles.categoryImage} src={sportingGoodsImg}></img>
+          </Card><p>Sporting Goods</p>
         </div>
-        <div onClick={()=>{categoryClickHandler("health-beauty")}}>
-        <Card className={styles.categoryCard} variant="outlined">
-          <img className={styles.categoryImage} src={ps5}></img>
-        </Card><p>Health & Beauty</p>
+        <div onClick={() => { categoryClickHandler("health-beauty") }}>
+          <Card className={styles.categoryCard} variant="outlined">
+            <img className={styles.categoryImage} src={healthImg}></img>
+          </Card><p>Health & Beauty</p>
         </div>
-        <div onClick={()=>{categoryClickHandler("books-movies-music")}}>
-        <Card className={styles.categoryCard} variant="outlined">
-          <img className={styles.categoryImage} src={ps5}></img>
-        </Card><p>Books, Movies & Music</p>
+        <div onClick={() => { categoryClickHandler("books-movies-music") }}>
+          <Card className={styles.categoryCard} variant="outlined">
+            <img className={styles.categoryImage} src={booksImg}></img>
+          </Card><p>Books, Movies & Music</p>
         </div>
-        <div onClick={()=>{categoryClickHandler("home-garden")}}>
-        <Card className={styles.categoryCard} variant="outlined">
-          <img className={styles.categoryImage} src={ps5}></img>
-        </Card><p>Home & Garden</p>
+        <div onClick={() => { categoryClickHandler("home-garden") }}>
+          <Card className={styles.categoryCard} variant="outlined">
+            <img className={styles.categoryImage} src={homeImg}></img>
+          </Card><p>Home & Garden</p>
         </div>
       </div>
     </div>
