@@ -24,11 +24,25 @@ const sellerSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a phone no."],
     },
+    nid: String,
+    nid_images: [String],
     password: {
       type: String,
       required: [true, "Please provide a password"],
     },
+    accountType: {
+      type: String,
+      default: "free",
+    },
     photo: String,
+    selling_points: {
+      type: Number,
+      default: 0,
+    },
+    approved: {
+      type: Boolean,
+      default: 0,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -36,6 +50,12 @@ const sellerSchema = new mongoose.Schema(
   }
 );
 
+//virtual populate for appointments
+sellerSchema.virtual("products", {
+  ref: "Product",
+  foreignField: "_sellerId",
+  localField: "_id",
+});
 //Model Creation
 const Seller = mongoose.model("Seller", sellerSchema);
 

@@ -1,4 +1,5 @@
 const Customer = require("../models/customerModel");
+const Product = require("../models/productModel");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getAllCustomer = catchAsync(async (req, res, next) => {
@@ -59,4 +60,30 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
   });
 });
 
-// Implement Buying Points
+// exports.bidAProduct = catchAsync(async (req, res, next) => {
+//   const productId = req.params.id;
+//   const userId = req.user.id;
+//   const product = await Product.findById(productId);
+//   const isBid = product.bids && product.bids.includes(userId);
+
+//   let option;
+//   if (!isBid) {
+//     option = "$addToSet";
+//   } else {
+//     return next(new AppError("You've already bid on this product", 400));
+//   }
+//   let pro = await Product.findByIdAndUpdate(
+//     productId,
+//     {
+//       [option]: { bids: userId },
+//     },
+//     { new: true }
+//   );
+
+//   res.status(201).json({
+//     message: "success",
+//     data: {
+//       pro,
+//     },
+//   });
+// });

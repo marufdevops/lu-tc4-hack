@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 //Schema Creation
-const customerSchema = new mongoose.Schema(
+const approveSellerSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
@@ -18,21 +18,23 @@ const customerSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "customer",
+      default: "seller",
     },
     phone: {
       type: String,
       required: [true, "Please provide a phone no."],
     },
+    nid: String,
+    nid_images: [String],
     password: {
       type: String,
       required: [true, "Please provide a password"],
     },
-    accountType: {
-      type: String,
-      default: "free",
-    },
     photo: String,
+    approved: {
+      type: Boolean,
+      default: 0,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -41,6 +43,6 @@ const customerSchema = new mongoose.Schema(
 );
 
 //Model Creation
-const Customer = mongoose.model("Customer", customerSchema);
+const ApproveSeller = mongoose.model("ApproveSeller", approveSellerSchema);
 
-module.exports = Customer;
+module.exports = ApproveSeller;
