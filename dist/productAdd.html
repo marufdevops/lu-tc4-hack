@@ -84,7 +84,7 @@
                 </div>
         </div>
 
-        <div class="container col-md-8 mt-4 mr-2">
+        <div class="container col-md-5 mt-4 mr-2">
             <form>
                     <div class="form-outline mb-4">
                         <input type="productName" id="form1Example1" class="form-control" />
@@ -95,13 +95,32 @@
                         <input type="productCategory" id="form1Example2" class="form-control" />
                         <label class="form-label" for="form1Example2">Product category</label>
                     </div>
-                    
+
                     <div class="form-outline mb-4">
                         <input type="productCategory" id="form1Example2" class="form-control" />
-                        <label class="form-label" for="form1Example2">Product category</label>
+                        <label class="form-label" for="form1Example2">Product quantity</label>
+                    </div>
+                                        
+                    <div class="mb-3">
+                      <label for="formFileMultiple" class="form-label">Add pictures of your product</label>
+                      <input class="form-control" type="file" id="formFileMultiple" multiple>
                     </div>
 
+                    <div class="form-outline mb-4">
+                        <input type="productCategory" id="form1Example2" class="form-control" />
+                        <label class="form-label" for="form1Example2">Lowest bidding price</label>
+                    </div>
+                    <form action="/action_page.php">
+                      <label for="expiration">Expiration Date</label>
+                      <input type="date" id="expiration" name="birthday">
                     </form>
+
+                    <div class="form-outline mb-4">
+                        <input type="productCategory" id="form1Example2" class="form-control" />
+                        <label class="form-label" for="form1Example2">Auto sell if bid is greater than</label>
+                    </div>
+
+                  </form>
 
         </div>
         
@@ -124,10 +143,13 @@
     </footer>
 
     <script src="bundle.js"></script>
+
     <!-- MDB -->
 <script
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.0/mdb.min.js"
+
+  
 ></script>
   </body>
 </html>
