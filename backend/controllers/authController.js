@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Seller = require("../models/sellerModel");
-const Customer = require("../models/customerModel")
+const Customer = require("../models/customerModel");
+const AppError = require("../utils/AppError.js");
+const catchAsync = require("../utils/catchAsync");
 
 let refreshTokens = [];
 
 //Sign Up An User
-exports.signUser = async (req, res, next) => {
+exports.signUser = catchAsync(async (req, res, next) => {
   const { email, firstName, lastName, phone, password, role } = req.body;
 
   //Hashing Password
@@ -16,9 +18,9 @@ exports.signUser = async (req, res, next) => {
   //Check if the email is unique
   let newUser;
 
-  //   if (!email || !fullname || !password || !role) {
-  //     return next(new AppError("provide the required fields", 400));
-  //   }
+  if (!email || !firstName || !lastName || !password || !role) {
+    return next(new AppError("provide the required fields", 400));
+  }
 
   //   if (role === "professional") {
   //     if ((await (await Professional.find({ email: email })).length) == 0) {
@@ -76,17 +78,17 @@ exports.signUser = async (req, res, next) => {
       role,
     });
   } else {
-    // return next(new AppError("provide the valid informations", 404));
+    return next(new AppError("provide the valid informations", 404));
   }
-};
+});
 
 //Logging in an user
-exports.login = async (req, res, next) => {
+exports.login = catchAsync(async (req, res, next) => {
   const { email, password, role } = req.body;
 
-  // if (!email || !password || !role) {
-  //   return next(new AppError("provide the required fields", 400));
-  // }
+  if (!email || !password || !role) {
+    return next(new AppError("provide the required fields", 400));
+  }
   //Check whether email matches
   let user;
   if (role === "customer" || role === "admin") {
@@ -95,9 +97,9 @@ exports.login = async (req, res, next) => {
     user = await Seller.find({ email: email });
   }
 
-  // if (!user) {
-  //   return next(new AppError("provide the valid informations", 404));
-  // }
+  if (!user) {
+    return next(new AppError("provide the valid informations", 404));
+  }
 
   //Check whether password matches
   if (user && (await bcrypt.compare(password, user[0].password))) {
@@ -117,11 +119,10 @@ exports.login = async (req, res, next) => {
       refreshToken: refreshToken,
       role: role,
     });
+  } else {
+    return next(new AppError("provide the valid informations", 404));
   }
-  // else {
-  //   return next(new AppError("provide the valid informations", 404));
-  // }
-};
+});
 
 //Token Creation
 const generateToken = (user) => {

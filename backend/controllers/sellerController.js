@@ -1,16 +1,17 @@
-const Customer = require("../models/customerModel");
+const Seller = require("../models/sellerModel");
 const catchAsync = require("../utils/catchAsync");
 
-exports.getAllCustomer = catchAsync(async (req, res, next) => {
-  const customers = await Customer.find();
+//Find All Sellers
+exports.getAllSellers = async (req, res, next) => {
+  const sellers = await Seller.find();
   res.status(200).json({
     message: "successful",
-    No_of_Customers: customers.length,
+    No_of_sellers: sellers.length,
     data: {
-      customers,
+      sellers,
     },
   });
-});
+};
 
 //Find A single Customer
 exports.getACustomer = catchAsync(async (req, res, next) => {
@@ -24,7 +25,7 @@ exports.getACustomer = catchAsync(async (req, res, next) => {
   });
 });
 
-//update customer info
+//update seller info
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
   Object.keys(obj).forEach((el) => {
@@ -42,7 +43,7 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
   );
 
   console.log(req.user);
-  const updatedUser = await Customer.findByIdAndUpdate(
+  const updatedUser = await Seller.findByIdAndUpdate(
     req.user.id,
     filteredBody,
     {
@@ -58,5 +59,3 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
     },
   });
 });
-
-// Implement Buying Points
