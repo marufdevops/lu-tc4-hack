@@ -110,6 +110,48 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 });
 
+exports.loginPhone = catchAsync(async (req, res, next) => {
+  const phone = req.body.phone
+  console.log(phone);
+  let role;
+  let user;
+  // try {
+  //   if (role === "customer" || role === "admin") {
+
+  //   } else if (role === "seller") {
+  //     user = await Seller.find({ phone: phone });
+  //   }
+  // } catch (err) {
+  //   console.log(err);
+  // }
+  user = await Customer.find({ phone: phone });
+  role = 'customer'
+  if (!user) {
+    user = await Seller.find({ phone: phone });
+    role = "seller"
+  }
+  if (!user) {
+
+    return next(new AppError("provide the valid informations", 404));
+  }
+  const userId = {
+    role,
+    id: user[0]._id,
+    firstName: user[0].firstName,
+  };
+
+  //Providing the user with a token
+  const accessToken = generateToken(userId);
+  const refreshToken = jwt.sign(userId, process.env.REFRESHTOKEN);
+  refreshTokens.push(refreshToken);
+
+  res.send({
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+    role: role,
+  });
+}
+)
 //Token Creation
 const generateToken = (user) => {
   return jwt.sign(user, process.env.ACCESSKEY, { expiresIn: "60d" });

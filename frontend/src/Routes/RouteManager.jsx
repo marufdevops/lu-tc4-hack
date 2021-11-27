@@ -8,6 +8,9 @@ import Home from '../Pages/Home/Home';
 import Product from '../Pages/Product/Product'
 import ListProduct from '../Pages/ListProduct/ListProduct'
 import MyBids from '../Pages/MyBids/MyBids';
+import Verify from '../Pages/verify/Verify';
+import Listing from '../Pages/Listing/Listing';
+import ProtectedRoute from './ProtectedRoute'
 const RouteManager = () => {
   const [user, setUser] = useState(null);
 
@@ -16,9 +19,16 @@ const RouteManager = () => {
     <Switch>
       <Route path={"/login"} exact component={Login} />
       <Route path={"/home"} exact component={Home} />
+      <ProtectedRoute path={"/"} exact component={Home} />
       <Route path={"/product/:prod"} exact component={Product} />
       <Route path={"/Listproduct"} exact component={ListProduct} />
+
+      <Route path={"/ver"} exact component={Verify} />
+      <Route path={"/listings"} exact component={Listing} />
+      <Route path={"/listings/:category"} exact component={Listing} />
+
       <Route path={"/myBids"} exact component={MyBids} />
+
 
       <UserContext.Provider value={value}>
         <Route path={"/signUp"} exact component={SignUp} />

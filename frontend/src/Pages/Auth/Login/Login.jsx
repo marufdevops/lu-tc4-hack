@@ -6,13 +6,30 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import axios from '../../../Helper/axios'
 import Cookies from 'universal-cookie';
 import { useHistory } from "react-router-dom"
+import firebase from 'firebase'
+
 const cookies = new Cookies()
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [radio, setRadio] = useState("customer")
+  const [phone, setPhone] = useState("")
   const formRef = React.useRef();
   let history = useHistory();
+
+  useEffect(() => {
+    const config = {
+      apiKey: "AIzaSyAi4oAauzCH0nJGBCfvK3NuqumM5_gnMLA",
+      authDomain: "bargain-otp.firebaseapp.com",
+      projectId: "bargain-otp",
+      storageBucket: "bargain-otp.appspot.com",
+      messagingSenderId: "138054163415",
+      appId: "1:138054163415:web:e1d93d184c6d70e1634992"
+    }
+
+    firebase.initializeApp(config);
+  }, [])
+
   const handleChange = (event, type) => {
     switch (type) {
       case "email":
@@ -24,11 +41,42 @@ const Login = () => {
       case "radio":
         setRadio(event.target.value)
         break
+      case "phone":
+        setPhone(event.target.value)
+        break
+
       default:
         break;
     }
   }
 
+  const getOTP = () => {
+    const number = phone;
+    let recaptcha = new firebase.auth.RecaptchaVerifier('recaptcha');
+
+
+    firebase.auth().signInWithPhoneNumber(number, recaptcha).then(function (e) {
+      let code = prompt('enter the otp', '');
+      if (code == null) return;
+      e.confirm(code).then(function (result) {
+        const body = {
+          phone
+        }
+        axios.post("api/users/loginPhone", body)
+          .then(res => {
+            if (res.status == 200) {
+              cookies.set("bargainc", res.data.accessToken)
+              cookies.set("bargainr", res.data.role)
+              history.push("/home");
+            }
+          }).catch(err => {
+            console.log(err);
+          })
+      }).catch((error) => {
+        console.log(error)
+      })
+    })
+  }
   const submit = () => {
     if (formRef.current.reportValidity) {
       const body = {
@@ -50,6 +98,7 @@ const Login = () => {
 
   }
 
+
   useEffect(() => {
     cookies.remove("bargainc")
     cookies.remove("bargainr")
@@ -61,8 +110,8 @@ const Login = () => {
       <div className={styles.mainSignUpDiv}>
         <form ref={formRef} className={styles.signUpDiv}>
           <p className={styles.signUpText}>Log In</p>
-          <TextField required="true" onChange={(event) => { handleChange(event, "email") }} className={styles.textField} id="standard-basic" type="email" label="Email" variant="outlined" />
-          <TextField required="true" onChange={(event) => { handleChange(event, "password") }} className={styles.textField} id="standard-basic" label="Password" type="password" variant="outlined" />
+          <TextField required="false" onChange={(event) => { handleChange(event, "email") }} className={styles.textField} id="standard-basic" type="email" label="Email" variant="outlined" />
+          <TextField required="false" onChange={(event) => { handleChange(event, "password") }} className={styles.textField} id="standard-basic" label="Password" type="password" variant="outlined" />
 
           <div className={styles.radioDiv}>
             <FormLabel className={styles.radioLabel} component="legend">Account Type</FormLabel>
@@ -74,7 +123,14 @@ const Login = () => {
 
 
           <Button className={styles.btn} onClick={submit} variant="contained" endIcon={<DoubleArrowIcon />}>Submit</Button>
-          <p style={{fontSize:'18px'}}>Don't have an account? <a className={styles.signUpLink} href="/signUp">Sign Up</a> </p>
+          <h1 className={styles.or}>Or, Login with Phone Number</h1>
+          <TextField required="false" onChange={(event) => { handleChange(event, "phone") }} className={styles.textField} id="standard-basic" label="Phone Number" variant="outlined" />
+          <div id="recaptcha"></div>
+          <Button className={styles.btn} onClick={getOTP} variant="contained" endIcon={<DoubleArrowIcon />}>Get OTP</Button>
+
+          {/* <Button className={styles.btn} onClick={submitPhone} variant="contained" endIcon={<DoubleArrowIcon />}>Verify</Button> */}
+
+          <p style={{ fontSize: '18px' }}>Don't have an account? <a className={styles.signUpLink} href="/signUp">Sign Up</a> </p>
         </form>
       </div>
     </div>
