@@ -36,6 +36,14 @@ const customerSchema = new mongoose.Schema(
       type: String,
       default: "free",
     },
+    confirmed: {
+      type: Boolean,
+      default: 0,
+    },
+    approved: {
+      type: Boolean,
+      default: 0,
+    },
     upvotes: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
     downvotes: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
 

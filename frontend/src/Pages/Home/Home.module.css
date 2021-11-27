@@ -7,12 +7,15 @@
   padding-right: 40px;
   border-right: 1px solid black;
 }
+
 .searchDiv {
-  width: 40%;
+  width: 50%;
   margin: auto;
-  margin-top: 50px;
-  padding: 30px;
-  background-color: #32cdfe;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  padding: 20px;
+  padding-left: 50px;
+  background-color: #c7efff;
   color: black !important;
   border-radius: 10px;
   display: flex;
@@ -23,13 +26,21 @@
 .searchInputDiv {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 98%;
+  gap: 20px;
 }
 .searchInput {
   width: 80%;
   height: 45px;
+  padding-left: 20px;
   border-radius: 30px;
   border: none;
+  letter-spacing: 2px;
+}
+
+.searchIcon{
+  padding-top: 5px;
 }
 
 .searchInput:focus {
@@ -37,18 +48,18 @@
 }
 
 .products {
-  width: 90%;
+  width: 100%;
   margin: auto;
   margin-top: 30px;
   display: flex;
   flex-direction: row;
   flex-flow: row wrap;
   justify-content: center;
-  gap: 50px;
+  gap: 30px;
 }
 .homeCard {
-  width: 270px;
-  height: 290px;
+  width: 300px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,19 +70,35 @@
 }
 .homeCard:hover {
   cursor: pointer;
-  box-shadow: 1.5px 1.5px 1.5px #ccc;
+  box-shadow: 2px 2px 2px #ccc;
 }
 .productImage {
-  width: 70%;
-  height: 60%;
+  width: 80%;
+  height: 80%;
 }
 p {
-  font-size: 30px;
+  font-size: 20px;
+  margin: 5px;
+}
+
+.categoriesHeaderText{
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 50px;
+}
+
+.featuredProductName{
+  font-size: 24px;
+  font-weight: 500;
+}
+.featuredProductBid{
+  font-size: 22px;
 }
 
 .categories {
   width: 80%;
   margin: auto;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: row;
   flex-flow: row wrap;
@@ -79,20 +106,20 @@ p {
   justify-content: center;
 }
 .categoryImage {
-  border-radius: 50%;
+  border-radius: 50% !important;
   width: 70%;
   height: 60%;
 }
 .categoryCard {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50% !important;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-bottom: 5px;
-  padding: 30px;
+  padding: 20px;
   box-shadow: 0.5px 0.5px 0.5px #ccc;
 }
 .categories > div:hover {

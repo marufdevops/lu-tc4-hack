@@ -8,6 +8,8 @@ import Home from '../Pages/Home/Home';
 import Product from '../Pages/Product/Product'
 import ListProduct from '../Pages/ListProduct/ListProduct'
 import MyBids from '../Pages/MyBids/MyBids';
+import Verify from '../Pages/verify/Verify';
+
 const RouteManager = () => {
   const [user, setUser] = useState(null);
 
@@ -18,7 +20,12 @@ const RouteManager = () => {
       <Route path={"/home"} exact component={Home} />
       <Route path={"/product/:prod"} exact component={Product} />
       <Route path={"/Listproduct"} exact component={ListProduct} />
+
+      <Route path={"/ver"} exact component={Verify} />
+
+
       <Route path={"/myBids"} exact component={MyBids} />
+
 
       <UserContext.Provider value={value}>
         <Route path={"/signUp"} exact component={SignUp} />
