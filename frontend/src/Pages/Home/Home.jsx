@@ -8,7 +8,10 @@ import axios from '../../Helper/axios'
 import { useHistory } from 'react-router';
 import ps5 from './ps5.jpg'
 const Home = () => {
-  let history=useHistory()
+  let history = useHistory()
+  const cardClickHandler = (product) => {
+    history.push(`/product/${product}`)
+  }
   const categoryClickHandler=(category)=>{
     history.push(`/category/${category}`)
   }
@@ -31,7 +34,7 @@ const Home = () => {
         </div>
       </div>
       <div className={styles.products}>
-        <Card className={styles.homeCard} variant="outlined">
+        <Card onClick={() => { cardClickHandler("ps5") }} className={styles.homeCard} variant="outlined">
           <img className={styles.productImage} src={ps5}></img>
           <p>Play Station 5</p>
           <p>Current Bid : $380</p>
