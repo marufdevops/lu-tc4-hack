@@ -13,9 +13,9 @@ const Topbar = (props) => {
   return (
     <div className={styles.topbarDiv} style={{ backgroundColor: "white" }}>
       <img onClick={logoClickListener} className={styles.logoImage} src={bargain} alt="Bargain"></img>
-      <ul className="topMenu">
+      <ul className={styles.topMenu}>
         {props.list.map(link => {
-          return <li> <NavLink className="navbarLinks" to={`/${link.link}`} exact activeClassName="selected"> {link}</NavLink></li>
+          return <li> <NavLink className={styles.navbarLinks} to={`/${link.link}`} exact activeClassName="selected"> {link.base.toUpperCase()}</NavLink> </li>
         })}
 
       </ul>
