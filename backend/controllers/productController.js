@@ -1,7 +1,6 @@
 const catchAsync = require("../utils/catchAsync");
 const Product = require("../models/productModel");
 
-
 //Get All the products
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   const products = await Product.find();
@@ -14,6 +13,19 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
   });
 });
 
+//Get All the products
+exports.getAProduct = catchAsync(async (req, res, next) => {
+  const product = await Product.findById(req.params.id).populate({
+    path: "bids",
+    select: "bid _bidderId",
+  });
+  res.status(200).json({
+    message: "successful",
+    data: {
+      product,
+    },
+  });
+});
 
 //Create a new product
 exports.createAProduct = catchAsync(async (req, res, next) => {
@@ -28,7 +40,6 @@ exports.createAProduct = catchAsync(async (req, res, next) => {
     },
   });
 });
-
 
 //Cancel an auction
 exports.cancelAnAuction = catchAsync(async (req, res, next) => {

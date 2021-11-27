@@ -20,6 +20,7 @@ router.patch("/sellers/updateProfileInfo", sellerController.updateProfileInfo);
 
 //Customer Routes
 router.route("/customers").get(customerController.getAllCustomer);
+router.route("/customers/:id").get(customerController.getACustomer);
 router.patch(
   "/customers/updateProfileInfo",
   customerController.updateProfileInfo

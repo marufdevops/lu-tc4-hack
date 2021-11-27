@@ -33,6 +33,8 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "highestBidder",
     },
+    allBids: [{ type: mongoose.Schema.ObjectId, ref: "Customer" }],
+
     photos: [String],
   },
   {
@@ -40,6 +42,13 @@ const productSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+//virtual populate for appointments
+productSchema.virtual("bids", {
+  ref: "Bid",
+  foreignField: "_productId",
+  localField: "_id",
+});
 
 //Model Creation
 const Product = mongoose.model("Product", productSchema);

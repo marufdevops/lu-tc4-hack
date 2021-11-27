@@ -40,6 +40,13 @@ const customerSchema = new mongoose.Schema(
   }
 );
 
+//virtual populate for bids
+customerSchema.virtual("bids", {
+  ref: "Bid",
+  foreignField: "_bidderId",
+  localField: "_id",
+});
+
 //Model Creation
 const Customer = mongoose.model("Customer", customerSchema);
 
