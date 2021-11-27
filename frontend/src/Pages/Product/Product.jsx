@@ -12,7 +12,7 @@ const Product = (props) => {
   const [response,setResponse]=useState({})
   const [userId,setUserId]=useState("")
   const [bid,setBid]=useState({})
-  const [dateDiff,setDateDiff]=("")
+  const [dateDiff,setDateDiff]=useState("")
   let history = useHistory()
   useEffect(()=>{
     axios.get(`/api/products/${props.match.params.prod}`)
@@ -27,11 +27,27 @@ const Product = (props) => {
   
   useEffect(()=>{
     if(response.auctionDeadline){
-      // console.log(response.auctionDeadline);
-      // const lastDay=new Date(response.auctionDeadline)
-      // // console.log(lastDay);
-      // // const diffTime = Math.abs(lastDay - new Date())
-      // console.log(lastDay, new Date());
+      const lastDay=parseInt(response.auctionDeadline.split("/")[0])
+      const lastMonth=parseInt(response.auctionDeadline.split("/")[1])
+      const lastYear=parseInt(response.auctionDeadline.split("/")[2])
+      const year=parseInt(new Date().getFullYear())
+      const month=parseInt(new Date().getMonth())
+      const day=parseInt(new Date().getDay())
+      const yearDiff=(lastYear-year)
+      const monthDiff=(lastMonth-month)
+      const dayDiff=(lastDay-day)
+      if(yearDiff>0){
+        yearDiff>1?setDateDiff(`${yearDiff} years left`):setDateDiff(`${yearDiff} year left`)
+      }else if(monthDiff>0){
+        monthDiff>1? setDateDiff(`${monthDiff} months left`):setDateDiff(`${monthDiff} month left`)
+      }else if(dayDiff>0){
+        dayDiff>1?setDateDiff(`${dayDiff} days left `):setDateDiff(`${dayDiff} day left `)
+      }else if(dayDiff==0){
+        setDateDiff("Last Day")
+      }
+      else{
+        setDateDiff("Time's Up")
+      }
     }
   },[response])
 
