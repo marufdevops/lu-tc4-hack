@@ -50,12 +50,13 @@ const sellerSchema = new mongoose.Schema(
   }
 );
 
-//virtual populate for appointments
+//virtual populate for products
 sellerSchema.virtual("products", {
   ref: "Product",
   foreignField: "_sellerId",
   localField: "_id",
 });
+
 //Model Creation
 const Seller = mongoose.model("Seller", sellerSchema);
 

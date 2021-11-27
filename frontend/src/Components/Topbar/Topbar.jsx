@@ -15,7 +15,7 @@ const Topbar = (props) => {
       <img onClick={logoClickListener} className={styles.logoImage} src={bargain} alt="Bargain"></img>
       <ul className={styles.topMenu}>
         {props.list.map(link => {
-          return <li> <NavLink className={styles.navbarLinks} to={`/${link.link}`} exact activeClassName="selected"> {link.base.toUpperCase()}</NavLink> </li>
+          return <li> <NavLink className={styles.navbarLinks} to={`/${link.link}`} exact activeClassName="selected"> {link.type==='image'? link.base :link.base.toUpperCase()}</NavLink> </li>
         })}
 
       </ul>

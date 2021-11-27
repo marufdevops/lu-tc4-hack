@@ -5,8 +5,10 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Topbar from '../../Components/Topbar/Topbar'
 import styles from './Home.module.css';
 import axios from '../../Helper/axios'
+import profile from './profile.png'
 import { useHistory } from 'react-router';
 import ps5 from './ps5.jpg'
+const cookies = new Cookies()
 const Home = () => {
   let history = useHistory()
   const cardClickHandler = (product) => {
@@ -18,7 +20,7 @@ const Home = () => {
 
   return (
     <div>
-      <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} />
+      {cookies.get('bargainc')?  <Topbar list={[{link:"profile", base:(<img className={styles.profileImage} src={profile}></img>), type:'image'}]}/> : <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} /> }
       <ul className={styles.categories}>
         <li>Browse By Category</li>
         <li>Electronics</li>
