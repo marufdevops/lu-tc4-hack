@@ -8,10 +8,11 @@ const globalErrorHandler = require("./controllers/errorController");
 
 const app = express();
 app.use(express.json());
+app.use(express.static("img/products"));
 
 // Cross-Origin Resource Sharing middleware
 app.use(
-  cors()
+  cors('*')
 );
 
 //REST Architecture

@@ -1,6 +1,8 @@
 const Customer = require("../models/customerModel");
 const Product = require("../models/productModel");
+const Bid = require("../models/bidModel");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/AppError");
 
 exports.getAllCustomer = catchAsync(async (req, res, next) => {
   const customers = await Customer.find();
@@ -15,7 +17,18 @@ exports.getAllCustomer = catchAsync(async (req, res, next) => {
 
 //Find A single Customer
 exports.getACustomer = catchAsync(async (req, res, next) => {
-  const customer = await Customer.findById(req.user.id);
+  const customer = await Customer.findById(req.user.id).populate({
+    path: "bids",
+    select: "bid _productId _sellerId productName sellerName",
+  });
+  const upvotes_length = customer.upvotes.length;
+  const downvotes_length = customer.downvotes.length;
+
+  const total = upvotes_length * 1 + downvotes_length * 1;
+
+  const buyer = await Customer.findByIdAndUpdate(req.user.id, {
+    $set: { active_points: total },
+  });
 
   res.status(200).json({
     message: "successful",
@@ -61,30 +74,38 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
   });
 });
 
-// exports.bidAProduct = catchAsync(async (req, res, next) => {
-//   const productId = req.params.id;
-//   const userId = req.user.id;
-//   const product = await Product.findById(productId);
-//   const isBid = product.bids && product.bids.includes(userId);
+exports.bidAProduct = catchAsync(async (req, res, next) => {
+  // const productId = req.params.id;
+  // const userId = req.user.id;
+  const product = await Product.findById(req.params.id);
+  const isBid = product.allBids && product.allBids.includes(req.user.id);
 
-//   let option;
-//   if (!isBid) {
-//     option = "$addToSet";
-//   } else {
-//     return next(new AppError("You've already bid on this product", 400));
-//   }
-//   let pro = await Product.findByIdAndUpdate(
-//     productId,
-//     {
-//       [option]: { bids: userId },
-//     },
-//     { new: true }
-//   );
+  let option;
+  if (!isBid) {
+    option = "$addToSet";
+  } else {
+    return next(new AppError("You've already bid on this product", 400));
+  }
+  await Product.findByIdAndUpdate(
+    product._id,
+    {
+      [option]: { allBids: req.user.id },
+    },
+    { new: true }
+  );
 
-//   res.status(201).json({
-//     message: "success",
-//     data: {
-//       pro,
-//     },
-//   });
-// });
+  const newBid = Bid.create({
+    _sellerId: product._sellerId,
+    sellerName: product.sellerName,
+    _bidderId: req.user.id,
+    _productId: product._id,
+    productName: product.productName,
+    bid: req.body.bid,
+  });
+  res.status(201).json({
+    message: "success",
+    data: {
+      newBid,
+    },
+  });
+});

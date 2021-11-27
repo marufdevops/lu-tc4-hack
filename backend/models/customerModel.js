@@ -28,7 +28,7 @@ const customerSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a password"],
     },
-    buyer_points: {
+    active_points: {
       type: Number,
       default: 0,
     },
@@ -44,6 +44,9 @@ const customerSchema = new mongoose.Schema(
       type: Boolean,
       default: 0,
     },
+    upvotes: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
+    downvotes: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
+
     photo: String,
   },
   {
@@ -51,6 +54,13 @@ const customerSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+//virtual populate for bids
+customerSchema.virtual("bids", {
+  ref: "Bid",
+  foreignField: "_bidderId",
+  localField: "_id",
+});
 
 //Model Creation
 const Customer = mongoose.model("Customer", customerSchema);

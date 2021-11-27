@@ -5,6 +5,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Topbar from '../../Components/Topbar/Topbar'
 import styles from './Home.module.css';
 import axios from '../../Helper/axios'
+import profile from './profile.png'
 import { useHistory } from 'react-router';
 import electronicsImg from './1.png'
 import collectiblesImg from './2.png'
@@ -15,6 +16,8 @@ import healthImg from './6.png'
 import booksImg from './7.png'
 import homeImg from './8.png'
 import ps5 from './ps5.jpg'
+
+const cookies = new Cookies()
 
 const Home = () => {
   let history = useHistory()
@@ -29,6 +32,8 @@ const Home = () => {
     <div>
       <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} />
       {/* <ul className={styles.categories}>
+      {cookies.get('bargainc')?  <Topbar list={[{link:"profile", base:(<img className={styles.profileImage} src={profile}></img>), type:'image'}]}/> : <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} /> }
+      <ul className={styles.categories}>
         <li>Browse By Category</li>
         <li>Electronics</li>
         <li>Kitchen Utensils</li>

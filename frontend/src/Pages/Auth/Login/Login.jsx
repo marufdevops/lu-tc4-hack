@@ -56,13 +56,13 @@ const Login = () => {
     document.title = "Login - Bargain";
   }, []);
   return (
-    <div className={styles.mainDiv} style={{ backgroundColor: "#EFF5E9" }}>
+    <div className={styles.mainDiv} style={{ backgroundColor: "#def6ff" }}>
       <Topbar list={[]} />
       <div className={styles.mainSignUpDiv}>
         <form ref={formRef} className={styles.signUpDiv}>
           <p className={styles.signUpText}>Log In</p>
-          <TextField required="true" onChange={(event) => { handleChange(event, "email") }} className={styles.textField} id="standard-basic" type="email" label="Email" variant="standard" />
-          <TextField required="true" onChange={(event) => { handleChange(event, "password") }} className={styles.textField} id="standard-basic" label="Passowrd" type="password" variant="standard" />
+          <TextField required="true" onChange={(event) => { handleChange(event, "email") }} className={styles.textField} id="standard-basic" type="email" label="Email" variant="outlined" />
+          <TextField required="true" onChange={(event) => { handleChange(event, "password") }} className={styles.textField} id="standard-basic" label="Password" type="password" variant="outlined" />
 
           <div className={styles.radioDiv}>
             <FormLabel className={styles.radioLabel} component="legend">Account Type</FormLabel>
@@ -74,7 +74,7 @@ const Login = () => {
 
 
           <Button className={styles.btn} onClick={submit} variant="contained" endIcon={<DoubleArrowIcon />}>Submit</Button>
-          <p>Don't have an account? <a className={styles.signUpLink} href="/signUp">Sign Up</a> </p>
+          <p style={{fontSize:'18px'}}>Don't have an account? <a className={styles.signUpLink} href="/signUp">Sign Up</a> </p>
         </form>
       </div>
     </div>

@@ -6,6 +6,7 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import axios from '../../../Helper/axios'
 import Cookies from 'universal-cookie';
 import { useHistory } from "react-router-dom"
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 const cookies = new Cookies()
 
 const getBase64 = (file, cb) => {
@@ -58,15 +59,14 @@ const Verification = () => {
             })
     }
     return (
-        <div className={styles.mainDiv} style={{ backgroundColor: "#EFF5E9" }}>
+        <div className={styles.mainDiv} style={{ backgroundColor: "#def6ff" }}>
             <Topbar list={[]} />
             <div className={styles.mainSignUpDiv}>
                 <form ref={formRef} className={styles.signUpDiv}>
                     <p className={styles.signUpText}>Verification</p>
                     <TextField required="true" onChange={(event) => { handleChange(event, "nationalIdNumber") }} className={styles.textField} id="standard-basic" label="National Identity Number" variant="standard" />
-                    <Button
-                        variant="contained"
-                        component="label"
+                    <div className={styles.imageInputs}>
+                    <button className={styles.nidImageInput}
                     >
                         NID Front Side
                         <input
@@ -74,10 +74,10 @@ const Verification = () => {
                             hidden
                             onChange={(event) => { handleChange(event, "nidFront") }}
                         />
-                    </Button>
-                    <Button style={{ margin: '10px' }}
-                        variant="contained"
-                        component="label"
+                        <AddPhotoAlternateOutlinedIcon/>
+                    </button>
+                    <button style={{ margin: '10px' }} className={styles.nidImageInput}
+                        
                     >
                         NID Back Side
                         <input
@@ -85,7 +85,9 @@ const Verification = () => {
                             hidden
                             onChange={(event) => { handleChange(event, "nidBack") }}
                         />
-                    </Button>
+                        <AddPhotoAlternateOutlinedIcon/>
+                    </button>
+                    </div>
                     <Button className={styles.btn} onClick={submit} variant="contained" endIcon={<DoubleArrowIcon />}>Submit</Button>
                 </form>
             </div>
