@@ -23,6 +23,7 @@ exports.getAProduct = catchAsync(async (req, res, next) => {
     message: "successful",
     data: {
       product,
+      userId:req.user.id
     },
   });
 });
