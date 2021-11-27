@@ -19,11 +19,11 @@ const Home = () => {
       </ul>
       <hr style={{ borderTop: '1px solid #40B8E5' }}></hr>
       <div className={styles.searchDiv}>
-      Search For Product
-      <div className={styles.searchInputDiv}>
-        <input className={styles.searchInput} />
-        <SearchOutlinedIcon fontSize='large' />
-      </div>
+        Search For Product
+        <div className={styles.searchInputDiv}>
+          <input className={styles.searchInput} />
+          <SearchOutlinedIcon fontSize='large' />
+        </div>
       </div>
       <div className={styles.products}>
         <Card className={styles.homeCard} variant="outlined">
@@ -55,6 +55,25 @@ const Home = () => {
           <img className={styles.productImage} src={ps5}></img>
           <p>Play Station 5</p>
           <p>Current Bid : $380</p>
+        </Card>
+      </div>
+
+      <div>
+        <Card className={styles.homeCard} variant="outlined">
+          <img className={styles.productImage} src={ps5}></img>
+          <p>Electronics</p>
+        </Card>
+        <Card className={styles.homeCard} variant="outlined">
+          <img className={styles.productImage} src={ps5}></img>
+          <p>Clothes</p>
+        </Card>
+        <Card className={styles.homeCard} variant="outlined">
+          <img className={styles.productImage} src={ps5}></img>
+          <p>Toys</p>
+        </Card>
+        <Card className={styles.homeCard} variant="outlined">
+          <img className={styles.productImage} src={ps5}></img>
+          <p>Collectibles</p>
         </Card>
       </div>
     </div>
