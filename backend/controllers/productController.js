@@ -32,6 +32,7 @@ exports.createAProduct = catchAsync(async (req, res, next) => {
   const newProduct = await Product.create({
     ...req.body,
     _sellerId: req.user.id,
+    photo: req.file ? req.file.filename : "productDefault.png",
   });
   res.status(201).json({
     message: "successful",

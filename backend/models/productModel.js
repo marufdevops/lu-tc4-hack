@@ -16,12 +16,18 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please select a category"],
     },
+    productDetails: {
+      type: String,
+    },
+    productCondition: {
+      type: String,
+    },
     startingBid: {
       type: String,
       required: [true, "Please enter a lowest bid amount"],
     },
     auctionDeadline: {
-      type: Date,
+      type: String,
       required: [true, "Please provide a deadline for the auction"],
     },
 
@@ -34,8 +40,11 @@ const productSchema = new mongoose.Schema(
       default: "highestBidder",
     },
     allBids: [{ type: mongoose.Schema.ObjectId, ref: "Customer" }],
-
-    photos: [String],
+    maxBid: {
+      type: String,
+      default: "0",
+    },
+    photo: String,
   },
   {
     toJSON: { virtuals: true },
