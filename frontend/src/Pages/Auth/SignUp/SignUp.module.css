@@ -1,0 +1,61 @@
+.mainDiv {
+    height: 100vh;
+  }
+  .mainSignUpDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* background-color: #baecff; */
+    background-color: #def6ff;
+  }
+
+  .signUpDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    height: fit-content;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 37px;
+    border-radius: 20px;
+  }
+  
+  .signUpText {
+    
+    font-family: "Poppins";
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 75px;
+    margin-top: 0px !important;
+    margin-bottom: 20px !important;
+    text-align: center;
+    color: #40B8E5
+;
+  }
+  
+  .textField {
+    padding-top: 20px;
+    width: 70%;
+    margin-bottom: 30px !important;
+  }
+  
+  .radioDiv {
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .btn {
+    padding: 7px 20px 7px 20px !important;
+    font-family: "Poppins" !important;
+    font-size: 18px !important;
+    background-color: #40B8E5 !important;
+  }
+  
+  .loginLink {
+    color: #40B8E5;
+  }
