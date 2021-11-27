@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 //Schema Creation
-const sellerSchema = new mongoose.Schema(
+const approveSellerSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
@@ -43,6 +43,6 @@ const sellerSchema = new mongoose.Schema(
 );
 
 //Model Creation
-const Seller = mongoose.model("Seller", sellerSchema);
+const ApproveSeller = mongoose.model("ApproveSeller", approveSellerSchema);
 
-module.exports = Seller;
+module.exports = ApproveSeller;

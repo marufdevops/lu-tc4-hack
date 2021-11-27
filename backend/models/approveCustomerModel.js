@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 //Schema Creation
-const sellerSchema = new mongoose.Schema(
+const approveCustomerSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
@@ -18,7 +18,7 @@ const sellerSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "seller",
+      default: "customer",
     },
     phone: {
       type: String,
@@ -43,6 +43,9 @@ const sellerSchema = new mongoose.Schema(
 );
 
 //Model Creation
-const Seller = mongoose.model("Seller", sellerSchema);
+const ApproveCustomer = mongoose.model(
+  "ApproveCustomer",
+  approveCustomerSchema
+);
 
-module.exports = Seller;
+module.exports = ApproveCustomer;
