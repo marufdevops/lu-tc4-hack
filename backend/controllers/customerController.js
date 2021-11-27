@@ -19,7 +19,15 @@ exports.getAllCustomer = catchAsync(async (req, res, next) => {
 exports.getACustomer = catchAsync(async (req, res, next) => {
   const customer = await Customer.findById(req.user.id).populate({
     path: "bids",
-    select: "bid _productId _sellerId productName",
+    select: "bid _productId _sellerId productName sellerName",
+  });
+  const upvotes_length = customer.upvotes.length;
+  const downvotes_length = customer.downvotes.length;
+
+  const total = upvotes_length * 1 + downvotes_length * 1;
+
+  const buyer = await Customer.findByIdAndUpdate(req.user.id, {
+    $set: { active_points: total },
   });
 
   res.status(200).json({
@@ -88,6 +96,7 @@ exports.bidAProduct = catchAsync(async (req, res, next) => {
 
   const newBid = Bid.create({
     _sellerId: product._sellerId,
+    sellerName: product.sellerName,
     _bidderId: req.user.id,
     _productId: product._id,
     productName: product.productName,

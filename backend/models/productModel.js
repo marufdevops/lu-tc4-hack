@@ -8,10 +8,15 @@ const productSchema = new mongoose.Schema(
       ref: "Seller",
       required: [true, "A product must have a seller"],
     },
+    sellerName: {
+      type: String,
+      required: [true, "Please provide a seller name"],
+    },
     productName: {
       type: String,
       required: [true, "Please provide a product name"],
     },
+
     category: {
       type: String,
       required: [true, "Please select a category"],
@@ -40,6 +45,8 @@ const productSchema = new mongoose.Schema(
       default: "highestBidder",
     },
     allBids: [{ type: mongoose.Schema.ObjectId, ref: "Customer" }],
+    upvotes: [{ type: mongoose.Schema.ObjectId, ref: "Customer" }],
+    downvotes: [{ type: mongoose.Schema.ObjectId, ref: "Customer" }],
     maxBid: {
       type: String,
       default: "0",

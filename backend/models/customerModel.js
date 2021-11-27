@@ -28,10 +28,17 @@ const customerSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a password"],
     },
+    active_points: {
+      type: Number,
+      default: 0,
+    },
     accountType: {
       type: String,
       default: "free",
     },
+    upvotes: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
+    downvotes: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
+
     photo: String,
   },
   {

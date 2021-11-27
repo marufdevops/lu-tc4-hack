@@ -19,4 +19,7 @@ router
   .get(productController.getAProduct)
   .post(customerController.bidAProduct);
 
+router.route("/upvote/:id").put(productController.upvoteAProduct);
+router.route("/downvote/:id").put(productController.downvoteAPost);
+
 module.exports = router;
