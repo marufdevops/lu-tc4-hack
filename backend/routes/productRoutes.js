@@ -19,6 +19,12 @@ router
   .get(productController.getAProduct)
   .post(customerController.bidAProduct);
 
+router.patch(
+  "/:id/update",
+  productController.uploadProductPhoto,
+  productController.updateProduct
+);
+
 router.route("/upvote/:id").put(productController.upvoteAProduct);
 router.route("/downvote/:id").put(productController.downvoteAPost);
 
