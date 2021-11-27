@@ -8,23 +8,23 @@
   border-right: 1px solid black;
 }
 .searchDiv {
-    width: 40%;
-    margin: auto;
-    margin-top: 50px;
-    padding: 30px;
-    background-color: #32cdfe;
-    color: black !important;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-  }
-  .searchInputDiv{
-      display: flex;
-      flex-direction: row;
-      width: 98%;
-  }
+  width: 40%;
+  margin: auto;
+  margin-top: 50px;
+  padding: 30px;
+  background-color: #32cdfe;
+  color: black !important;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.searchInputDiv {
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+}
 .searchInput {
   width: 80%;
   height: 45px;
@@ -32,8 +32,8 @@
   border: none;
 }
 
-.searchInput:focus{
-    outline: none;
+.searchInput:focus {
+  outline: none;
 }
 
 .products {
@@ -55,17 +55,56 @@
   flex-direction: column;
   margin-bottom: 5px;
   padding: 30px;
-  box-shadow: .5px .5px .5px #ccc;
+  box-shadow: 0.5px 0.5px 0.5px #ccc;
 }
-.homeCard:hover{
-    cursor: pointer;
-    box-shadow: 1.5px 1.5px 1.5px #ccc;
+.homeCard:hover {
+  cursor: pointer;
+  box-shadow: 1.5px 1.5px 1.5px #ccc;
 }
 .productImage {
   width: 70%;
   height: 60%;
 }
-p{
-    font-size: 30px;
+p {
+  font-size: 30px;
 }
 
+.categories {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  gap: 90px;
+  justify-content: center;
+}
+.categoryImage {
+  border-radius: 50%;
+  width: 70%;
+  height: 60%;
+}
+.categoryCard {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 5px;
+  padding: 30px;
+  box-shadow: 0.5px 0.5px 0.5px #ccc;
+}
+.categories>div:hover{
+    cursor: pointer;
+}
+
+.categories>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.categoriesHeaderText{
+    text-align: center;
+    margin-top: 80px;
+}

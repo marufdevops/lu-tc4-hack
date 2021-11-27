@@ -8,6 +8,11 @@ import axios from '../../Helper/axios'
 import { useHistory } from 'react-router';
 import ps5 from './ps5.jpg'
 const Home = () => {
+  let history=useHistory()
+  const categoryClickHandler=(category)=>{
+    history.push(`/category/${category}`)
+  }
+
   return (
     <div>
       <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} />
@@ -58,23 +63,31 @@ const Home = () => {
         </Card>
       </div>
 
-      <div>
-        <Card className={styles.homeCard} variant="outlined">
-          <img className={styles.productImage} src={ps5}></img>
-          <p>Electronics</p>
-        </Card>
-        <Card className={styles.homeCard} variant="outlined">
-          <img className={styles.productImage} src={ps5}></img>
-          <p>Clothes</p>
-        </Card>
-        <Card className={styles.homeCard} variant="outlined">
-          <img className={styles.productImage} src={ps5}></img>
-          <p>Toys</p>
-        </Card>
-        <Card className={styles.homeCard} variant="outlined">
-          <img className={styles.productImage} src={ps5}></img>
-          <p>Collectibles</p>
-        </Card>
+      <p className={styles.categoriesHeaderText}> Search By Popular Categories </p>
+      <div className={styles.categories}>
+        <div onClick={()=>{categoryClickHandler("electronics")}}>
+        <Card className={styles.categoryCard} variant="outlined">
+          <img className={styles.categoryImage} src={ps5}></img>
+          
+        </Card><p>Electronics</p>
+        </div>
+        <div>
+        <Card className={styles.categoryCard} variant="outlined">
+          <img className={styles.categoryImage} src={ps5}></img>
+          
+        </Card><p>Clothes</p>
+        </div>
+        <div>
+        <Card className={styles.categoryCard} variant="outlined">
+          <img className={styles.categoryImage} src={ps5}></img>
+          
+        </Card><p>Toys</p>
+        </div>
+        <div>
+        <Card className={styles.categoryCard} variant="outlined">
+          <img className={styles.categoryImage} src={ps5}></img>
+        </Card><p>Collectibles</p>
+        </div>
       </div>
     </div>
   )
