@@ -28,6 +28,10 @@ const customerSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a password"],
     },
+    accountType: {
+      type: String,
+      default: "free",
+    },
     photo: String,
   },
   {
