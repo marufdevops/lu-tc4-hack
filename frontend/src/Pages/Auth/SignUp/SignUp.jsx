@@ -59,12 +59,12 @@ const SignUp = () => {
           password
         }
         console.log(body);
-        axios.post("/api/users/signUp",body)
-          .then(res=>{
-            cookies.set("bargainc",res.data.accessToken)
-            cookies.set("bargainr",res.data.role)
+        axios.post("/api/users/signup", body)
+          .then(res => {
+            cookies.set("bargainc", res.data.accessToken)
+            cookies.set("bargainr", res.data.role)
             history.push("/home");
-          }).catch(err=>{
+          }).catch(err => {
             console.log(err);
           })
       } else {

@@ -8,43 +8,48 @@ import DatePicker from '@mui/lab/DatePicker';
 import axios from '../../Helper/axios'
 import { useHistory } from "react-router-dom"
 
+const categories = ['Electronics & Accessories', 'Collectibles & Art', 'Toys & Hobbies', 'Fashion', 'Sporting Goods', 'Health & Beauty', 'Books, Movies & Music', 'Home & Garden']
 const ListProduct = () => {
   let history = useHistory()
+  const [productName, setProductName] = useState("")
+  const [productDescription, setProductDescription] = useState("")
+  const [startingBid, setStartingBid] = useState("")
   const [date, setDate] = useState(new Date());
+  const [condition, setCondition] = useState("")
   const [maxDate, setMaxDate] = useState("")
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [number, setNumber] = useState("")
-  const [productName, setProductName] = useState("")
   const [time, setTime] = useState("")
   const [profName, setProfName] = useState("")
   const [timeState, setTimeState] = useState("")
-  const responseRef = useRef()
+  const [productCategory, setProductCategory] = useState(categories[0])
   const formRef = useRef();
   const handleChange = (event, type) => {
     switch (type) {
-      case "name":
-        setName(event.target.value)
-        break;
-      case "email":
-        setEmail(event.target.value)
-        break;
       case "productName":
         setProductName(event.target.value)
         break;
-      case "number":
-        setNumber(event.target.value)
+      case "productDescription":
+        setProductDescription(event.target.value)
         break;
-
+      case "productCondition":
+        setCondition(event.target.value)
+        break;
+      case "startingBid":
+        setStartingBid(event.target.value)
+        break;
       default:
         break;
     }
   }
 
 
-  const handleDateChange = (newDate) => {
-    setDate(newDate)
+
+  const handleSelectChange = (event) => {
+    setProductCategory(event.target.value)
   }
+
 
 
   const paymentButton = useRef()
@@ -68,14 +73,25 @@ const ListProduct = () => {
   const confirmAppointment = (event) => {
     if (formRef.current.reportValidity()) {
       event.preventDefault();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
       const body = {
-        consumersName: name,
-        email,
-        number,
         productName,
-        time,
-        date: date.toDateString(),
+        category: productCategory,
+        productDetails: productDescription,
+        startingBid,
+        productCondition: condition,
+        auctionDeadline: day + "/" + month + "/" + year,
       }
+      axios.post("/api/products", body)
+        .then(res => {
+          console.log(res);
+          history.push("/home")
+        }).catch(err => {
+          console.log(err);
+        })
+      console.log(body);
     }
   }
 
@@ -90,21 +106,26 @@ const ListProduct = () => {
               <Typography className={styles.profName} gutterBottom variant="h5" component="div">
                 List New Product
               </Typography>
-              <div className={styles.formFields1}>
-                <TextField required="true" onChange={(event) => { handleChange(event, "productName") }} className={styles.textField} id="standard-basic" label="ProductName" variant="outlined" />
-                <TextField required="true" onChange={(event) => { handleChange(event, "name") }} className={styles.textField} id="standard-basic" label="Product Name" variant="outlined" />
-
+              <TextField required="true" onChange={(event) => { handleChange(event, "productName") }} className={styles.textField} id="standard-basic" label="ProductName" variant="outlined" />
+              <div style={{ marginTop: '20px' }}>
+                <select name="Select One" onChange={handleSelectChange} value={productCategory} className={styles.categorySelect}>
+                  {categories.map((category, index) => {
+                    return <option key={index}>{category}</option>
+                  })}
+                </select>
               </div>
+
               <div className={styles.formFields1}>
-                <TextField required="true" onChange={(event) => { handleChange(event, "email") }} className={styles.textField} id="standard-basic" type="email" label="Email" variant="outlined" />
-                <TextField required="true" onChange={(event) => { handleChange(event, "number") }} className={styles.textField} id="standard-basic" type="text" label="Phone Number" variant="outlined" />
+                <TextField required="true" onChange={(event) => { handleChange(event, "productDescription") }} className={styles.textField} id="standard-basic" type="text" label="Product Description" variant="outlined" />
+                <TextField required="true" onChange={(event) => { handleChange(event, "productCondition") }} className={styles.textField} id="standard-basic" type="text" label="Product Condition" variant="outlined" />
+                <TextField required="true" onChange={(event) => { handleChange(event, "startingBid") }} className={styles.textField} id="standard-basic" type="number" label="Starting Bid" variant="outlined" />
 
               </div>
               <div
                 className={styles.datePicker}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
-                    label="Basic example"
+                    label="Auction Deadline"
                     value={date}
                     onChange={(newValue) => {
                       setDate(newValue);

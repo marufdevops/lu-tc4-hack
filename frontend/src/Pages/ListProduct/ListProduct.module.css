@@ -94,3 +94,11 @@
   cursor: pointer;
   box-shadow: 3px 3px 3px #ccc;
 }
+
+.categorySelect{
+  width: 457px;
+  font-size: 18px;
+  height: 57px;
+  border-color:1px solid gray;
+  border-radius: 3px;
+}

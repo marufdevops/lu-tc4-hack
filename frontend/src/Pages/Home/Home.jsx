@@ -25,12 +25,12 @@ const Home = () => {
     history.push(`/product/${product}`)
   }
   const categoryClickHandler = (category) => {
-    history.push(`/category/${category}`)
+    history.push(`/listings/${category}`)
   }
 
   return (
     <div>
-      <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} />
+      {cookies.get('bargainc') ? <Topbar list={[{ link: "profile", base: (<img className={styles.profileImage} src={profile}></img>), type: 'image' }]} /> : <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} />}
       {/* <ul className={styles.categories}>
       {cookies.get('bargainc')?  <Topbar list={[{link:"profile", base:(<img className={styles.profileImage} src={profile}></img>), type:'image'}]}/> : <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} /> }
       <ul className={styles.categories}>

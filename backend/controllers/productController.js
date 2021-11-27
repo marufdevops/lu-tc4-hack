@@ -36,7 +36,7 @@ exports.getAProduct = catchAsync(async (req, res, next) => {
     data: {
       product,
       seller,
-      userId:req.user.id
+      userId: req.user.id
     },
   });
 });
@@ -46,6 +46,7 @@ exports.createAProduct = catchAsync(async (req, res, next) => {
   const newProduct = await Product.create({
     ...req.body,
     _sellerId: req.user.id,
+    sellerName: req.user.firstName,
     photo: req.file ? req.file.filename : "productDefault.png",
   });
   res.status(201).json({
