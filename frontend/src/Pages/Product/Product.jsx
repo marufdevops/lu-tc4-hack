@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Product.module.css'
 import Topbar from '../../Components/Topbar/Topbar'
-import docPic from './ps5.jpg'
+import productPic from './ps5.jpg'
 import { Typography, Grid, Button } from '@mui/material'
+import profile from './profile.png'
 import axios from '../../Helper/axios'
 import Cookies from 'universal-cookie'
 import { useHistory } from 'react-router'
+let cookies=new Cookies()
 const product = () => {
   // let history = useHistory()
   // const cookies = new Cookies()
@@ -49,7 +51,7 @@ const product = () => {
 
   return (
     <div>
-      <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} />
+      {cookies.get('bargainc')?  <Topbar list={[{link:"profile", base:(<img className={styles.profileImage} src={profile}></img>), type:'image'}]}/> : <Topbar list={[{ link: "login", base: "Login" }, { link: "signUp", base: "Sign Up" }]} /> }
       <Grid
         container
         spacing={8}
@@ -58,55 +60,39 @@ const product = () => {
       >
         <Grid item xs={8} sm={6} md={3}>
           <div className={styles.productInfo1}>
-            <img className={styles.productImg} src={docPic} alt="" />
-            <Typography className={styles.productName} gutterBottom variant="h5" component="div">
-              PS5
-            </Typography>
-            <Typography className={styles.productDregrees} variant="body2" color="text.secondary">
-
-            </Typography>
+            <img className={styles.productImg} src={productPic} alt="" />
           </div>
         </Grid>
 
         <Grid item xs={8} sm={6} md={8.65}>
 
 
-          <h1 style={{ textAlign: 'left' }}>Qualifications:</h1>
-          {/* <div className={styles.productInfo2}>
+          <h1 style={{ textAlign: 'left' }}>Playstation 5 128 GB With 3 Free Games</h1>
+          <hr style={{ borderTop: '1px solid #40B8E5' }}></hr>
+          <Typography className={styles.infoTitle} gutterBottom variant="h5" component="div">
+              Condition: New
+            </Typography>
             <Typography className={styles.infoTitle} gutterBottom variant="h5" component="div">
-              Specialization
+              Time Left: 14H 15M
             </Typography>
-            {specializations.map((special, index) => <Typography className={styles.infoDesc} variant="body2" color="text.secondary" key={index}>{special}<br /></Typography>)}
-            <Typography className={styles.infoTitle} variant="h5" >
-              Achievements
-            </Typography>
-            <Typography className={styles.infoDesc} variant="body2" color="text.secondary">
-              {achievements}</Typography>
+            <hr style={{ borderTop: '1px solid #40B8E5' }}></hr>
             <Typography className={styles.infoTitle} gutterBottom variant="h5" component="div">
-              Education Qualifications
+              Current Bid: $340
             </Typography>
-            <Typography className={styles.infoDesc} variant="body2" color="text.secondary">
-              {education_qualifications}</Typography>
-            <Typography className={styles.infoTitle} gutterBottom variant="h5" component="div">
-              Research and Publications
-            </Typography>
-            <Typography className={styles.infoDesc} variant="body2" color="text.secondary">
-              {research_and_Publications}</Typography>
-            <Typography className={styles.infoTitle} gutterBottom variant="h5" component="div">
-              Work Experience
-            </Typography>
-            <Typography className={styles.infoDesc} variant="body2" color="text.secondary">
-              {work_experience}</Typography>
-
-          </div>
-          {
-            !same ? <div className={styles.btn}>
-              <Button onClick={chatButtonClicked} className={styles.chatDoc}>Chat with doctor</Button>
-              {cookies.get("assistr") === "consumer" ? <Button onClick={setAppointmentButtonClicked} className={styles.setApp}>Set Appointment</Button> : null}
-            </div> : null
-          } */}
+            <div>
+              <input className={styles.placeBid}/> <button className={styles.bidButton}>Place Bid</button>
+            </div>
+            <p style={{margin:'10px 0 10px 0'}}>OR</p>
+            <div>
+              <input className={styles.placeBid}/> <button className={styles.bidButton}>BUY NOW</button>
+            </div>
         </Grid>
-      </Grid>
+        </Grid>
+        <div className={styles.description}>
+        <h3>Product Description </h3> 
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      
+        </div>
     </div>
   )
 }
