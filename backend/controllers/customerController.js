@@ -33,6 +33,7 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 exports.updateProfileInfo = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const filteredBody = filterObj(
     req.body,
     "firstName",
