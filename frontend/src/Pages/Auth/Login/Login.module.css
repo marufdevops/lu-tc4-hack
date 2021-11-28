@@ -26,7 +26,6 @@
 }
 
 .signUpText {
-  
   font-family: "Poppins";
   font-weight: 500;
   font-size: 34px !important;
@@ -34,8 +33,7 @@
   margin-top: 0px !important;
   margin-bottom: 20px !important;
   text-align: center;
-  color: #40B8E5
-;
+  color: #40b8e5;
 }
 
 .textField {
@@ -54,9 +52,14 @@
   padding: 7px 20px 7px 20px !important;
   font-family: "Poppins" !important;
   font-size: 18px !important;
-  background-color: #40B8E5 !important;
+  background-color: #40b8e5 !important;
 }
-  
-  .signUpLink {
-    color: skyblue;
-  }
+
+.signUpLink {
+  color: skyblue;
+}
+
+.or {
+  font-size: 26px;
+  font-weight: 400;
+}

@@ -2,7 +2,7 @@ const Seller = require("../models/sellerModel");
 const catchAsync = require("../utils/catchAsync");
 const multermiddleware = require("../middlewares/multermiddleware");
 const Product = require("../models/productModel");
-const fs = require('fs')
+const fs = require("fs");
 
 //Find All Sellers
 exports.getAllSellers = async (req, res, next) => {
@@ -41,15 +41,16 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.updateProfileInfo = catchAsync(async (req, res, next) => {
-
-
-
-
-  console.log(req.body);
-  let base64Image = req.body.nidFront.split(';base64,').pop();
-  fs.writeFile(`./img/nid/${req.user.id}.jpg`, base64Image, 'base64', function (err) {
-    console.log(err);
-  });
+  // console.log(req.body);
+  // let base64Image = req.body.nidFront.split(";base64,").pop();
+  // fs.writeFile(
+  //   `./img/nid/${req.user.id}.jpg`,
+  //   base64Image,
+  //   "base64",
+  //   function (err) {
+  //     console.log(err);
+  //   }
+  // );
   // const filteredBody = filterObj(
   //   req.body,
   //   photo:`nid-${req.user.id}.jpg`,
@@ -58,10 +59,10 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
   //   "phone",
   //   "password"
   // );
-  const update = await Seller.findByIdAndUpdate(req.user.id, {
-    photo: `nid-${req.user.id}.jpg`,
-    nid: req.body.nid
-  })
+  // const update = await Seller.findByIdAndUpdate(req.user.id, {
+  //   photo: `nid-${req.user.id}.jpg`,
+  //   nid: req.body.nid
+  // })
   // const updatedUser = await Seller.findByIdAndUpdate(
   //   req.user.id,
   //   filteredBody,
@@ -70,12 +71,16 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
   //     runValidators: true,
   //   }
   // );
-
-
+  const updatedUser = await Seller.findByIdAndUpdate(req.user.id, {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    phone: req.body.phone,
+    password: req.body.password,
+  });
   res.status(200).json({
     status: "success",
     data: {
-      user: update,
+      user: updatedUser,
     },
   });
 });

@@ -47,25 +47,31 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 exports.updateProfileInfo = catchAsync(async (req, res, next) => {
-  console.log(req.body);
-  const filteredBody = filterObj(
-    req.body,
-    "firstName",
-    "lastName",
-    "phone",
-    "password"
-  );
+  // console.log(req.body);
+  // const filteredBody = filterObj(
+  //   req.body,
+  //   "firstName",
+  //   "lastName",
+  //   "phone",
+  //   "password"
+  // );
 
-  console.log(req.user);
-  const updatedUser = await Customer.findByIdAndUpdate(
-    req.user.id,
-    filteredBody,
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+  // console.log(req.user);
+  // const updatedUser = await Customer.findByIdAndUpdate(
+  //   req.user.id,
+  //   filteredBody,
+  //   {
+  //     new: true,
+  //     runValidators: true,
+  //   }
+  // );
 
+  const updatedUser = await Customer.findByIdAndUpdate(req.user.id, {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    phone: req.body.phone,
+    password: req.body.password,
+  });
   res.status(200).json({
     status: "success",
     data: {

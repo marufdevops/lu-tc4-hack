@@ -13,6 +13,7 @@ router.post("/loginPhone", authController.loginPhone);
 //All routes after this middleware are protected
 router.use(authmiddlewares.protectRoute);
 
+router.route("/userInfo").get(authController.getUserInfo);
 //Seller Routes
 router.route("/sellers").get(sellerController.getAllSellers);
 router.route("/sellers/:id").get(sellerController.getASeller);

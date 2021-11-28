@@ -111,7 +111,7 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.loginPhone = catchAsync(async (req, res, next) => {
-  const phone = req.body.phone
+  const phone = req.body.phone;
   console.log(phone);
   let role;
   let user;
@@ -125,13 +125,12 @@ exports.loginPhone = catchAsync(async (req, res, next) => {
   //   console.log(err);
   // }
   user = await Customer.find({ phone: phone });
-  role = 'customer'
+  role = "customer";
   if (!user) {
     user = await Seller.find({ phone: phone });
-    role = "seller"
+    role = "seller";
   }
   if (!user) {
-
     return next(new AppError("provide the valid informations", 404));
   }
   const userId = {
@@ -150,8 +149,7 @@ exports.loginPhone = catchAsync(async (req, res, next) => {
     refreshToken: refreshToken,
     role: role,
   });
-}
-)
+});
 //Token Creation
 const generateToken = (user) => {
   return jwt.sign(user, process.env.ACCESSKEY, { expiresIn: "60d" });
@@ -176,3 +174,15 @@ const generateToken = (user) => {
 //         message: "pending for approval",
 //       });
 //     });
+
+exports.getUserInfo = catchAsync(async (req, res, next) => {
+  const id = req.user.id;
+  let user;
+  user = await Customer.findById(id);
+  if (!user) {
+    user = await Seller.findById(id);
+  }
+  res.send({
+    user,
+  });
+});
