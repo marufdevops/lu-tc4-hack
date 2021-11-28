@@ -1,6 +1,6 @@
 // --------------------------------Hadeling Firebase----------------------------------//
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, RecaptchaVerifier } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, RecaptchaVerifier, signInWithPhoneNumber, signInWithCredential, PhoneAuthProvider } from 'firebase/auth';
 
 
 const firebaseConfig = {
@@ -29,7 +29,9 @@ recaptchaVerifier.render().then(widgetId => {
 })
 
 // const recaptchaResponse = grecaptcha.getResponse(recaptchaWidgetId);
-const appVerifier = window.recaptchaVerifier;
+// console.log(recaptchaResponse);
+// const appVerifier = window.recaptchaVerifier;
+// console.log(appVerifier);
 
 //sign-up
 const signupForm = document.querySelector("#signup-form");
@@ -49,16 +51,67 @@ signupForm.addEventListener('submit', (e) => {
     let password = document.querySelector("#signup-password").value;
     let confirmPassword = document.querySelector('#confirm-password').value;
 
+
+    var T = document.getElementById("OTP-div"),
+        displayValue = "";
+    if (T.style.display == "")
+        displayValue = "none";
+
+    T.style.display = displayValue;
+
+    T = document.getElementById("verify-btn"),
+        displayValue = "";
+    if (T.style.display == "")
+        displayValue = "none";
+
+    T.style.display = displayValue;
+
+    document.getElementById("register-btn").style.display = "";
+
+
+
+
     console.log(email);
     console.log(password);
     console.log(confirmPassword);
     console.log(name);
 
-    document.location.href = "index.html";
+
+    const phoneNumber = email;
+    const appVerifier = window.recaptchaVerifier;
+
+    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+        .then(confirmationResult => {
+            window.confirmationResult = confirmationResult;
+            // const sentCodeId = confirmationResult.verificationId;
+            // let verify = document.querySelector("#verify-btn");
+            // verify.addEventListener('click', () => signInWithPhone(sentCodeId));
+        });
+
+    const signInWithPhone = sentCodeId => {
+        const code = document.querySelector("#OTP-input").value;
+        var credential = firebase.auth.PhoneAuthProvider.credential(sentCodeId, code);
+        // const credential = PhoneAuthProvider.credential(sentCodeId, code);
+        signInWithCredential(auth, credential)
+            .then((cred) => {
+                console.log(cred.user);
+                // window.location.assign('./profile');
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
+
+    document.location.href = "./OTP.html";
 
 })
 
 
+// const OTPform = document.querySelector("#OTP-form");
+// OTPform.addEventListener('submit', e => {
+//     e.preventDefault();
+//     console.log(document.querySelector("#form3Example4").value);
+// });
 
 
 
