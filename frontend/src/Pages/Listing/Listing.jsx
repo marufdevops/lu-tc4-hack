@@ -19,6 +19,7 @@ const Listing = (props) => {
       .then(res => {
         setResponse(res.data.data.products)
         setProducts(res.data.data.products)
+        console.log(res.data.data.products);
         if (props.match.params.category) {
           console.log("what");
           setCategory(props.match.params.category)

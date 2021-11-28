@@ -10,31 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static("img/products"));
 
-// Cross-Origin Resource Sharing middleware
-// app.use(
-//   cors('*')
-// );
-// app.use(cors(), function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
-
-app.use(function (req, res, next) {
-
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  next();
-});
-app.options('/*', (_, res) => {
-  res.sendStatus(200);
-});
+app.use(cors())
 
 //REST Architecture
 app.use("/api/users", userRouter);
