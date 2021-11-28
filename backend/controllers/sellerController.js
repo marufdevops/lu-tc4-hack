@@ -1,4 +1,6 @@
 const Seller = require("../models/sellerModel");
+const bcrypt = require("bcryptjs");
+
 const catchAsync = require("../utils/catchAsync");
 const multermiddleware = require("../middlewares/multermiddleware");
 const Product = require("../models/productModel");
@@ -71,11 +73,15 @@ exports.updateProfileInfo = catchAsync(async (req, res, next) => {
   //     runValidators: true,
   //   }
   // );
+  //Hashing Password
+  const salt = bcrypt.genSaltSync(12);
+  const hash = bcrypt.hashSync(req.body.password, salt);
+
   const updatedUser = await Seller.findByIdAndUpdate(req.user.id, {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phone: req.body.phone,
-    password: req.body.password,
+    password: hash,
   });
   res.status(200).json({
     status: "success",

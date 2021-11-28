@@ -148,7 +148,7 @@ const Product = (props) => {
                 variant="h5"
                 component="div"
               >
-                Time Left: 4 Days
+                Time Left: {dateDiff}
               </Typography>
               <hr style={{ borderTop: "1px solid #40B8E5" }}></hr>
               <Typography
