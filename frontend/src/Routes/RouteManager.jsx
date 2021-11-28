@@ -11,6 +11,7 @@ import MyBids from '../Pages/MyBids/MyBids';
 import Verify from '../Pages/verify/Verify';
 import Listing from '../Pages/Listing/Listing';
 import ProtectedRoute from './ProtectedRoute'
+import AdminPanel from '../Pages/Auth/Admin/Admin';
 const RouteManager = () => {
   const [user, setUser] = useState(null);
 
@@ -22,7 +23,7 @@ const RouteManager = () => {
       <ProtectedRoute path={"/"} exact component={Home} />
       <Route path={"/product/:prod"} exact component={Product} />
       <Route path={"/Listproduct"} exact component={ListProduct} />
-
+      <ProtectedRoute role="admin" path={'admin'} exact component={AdminPanel} />
       <Route path={"/ver"} exact component={Verify} />
       <Route path={"/listings"} exact component={Listing} />
       <Route path={"/listings/:category"} exact component={Listing} />

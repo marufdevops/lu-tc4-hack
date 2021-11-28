@@ -42,9 +42,10 @@ const sellerSchema = new mongoose.Schema(
 
     max: {
       type: Number,
+      default: 0,
     },
 
-    confirmed:{
+    confirmed: {
       type: Boolean,
 
       default: 0,

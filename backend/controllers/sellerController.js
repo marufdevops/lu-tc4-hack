@@ -2,6 +2,7 @@ const Seller = require("../models/sellerModel");
 const catchAsync = require("../utils/catchAsync");
 const multermiddleware = require("../middlewares/multermiddleware");
 const Product = require("../models/productModel");
+const fs = require('fs')
 
 //Find All Sellers
 exports.getAllSellers = async (req, res, next) => {
@@ -40,28 +41,41 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.updateProfileInfo = catchAsync(async (req, res, next) => {
-  const filteredBody = filterObj(
-    req.body,
-    "firstName",
-    "lastName",
-    "phone",
-    "password"
-  );
 
-  console.log(req.user);
-  const updatedUser = await Seller.findByIdAndUpdate(
-    req.user.id,
-    filteredBody,
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+
+
+
+  console.log(req.body);
+  let base64Image = req.body.nidFront.split(';base64,').pop();
+  fs.writeFile(`./img/nid/${req.user.id}.jpg`, base64Image, 'base64', function (err) {
+    console.log(err);
+  });
+  // const filteredBody = filterObj(
+  //   req.body,
+  //   photo:`nid-${req.user.id}.jpg`,
+  //   "firstName",
+  //   "lastName",
+  //   "phone",
+  //   "password"
+  // );
+  const update = await Seller.findByIdAndUpdate(req.user.id, {
+    photo: `nid-${req.user.id}.jpg`,
+    nid: req.body.nid
+  })
+  // const updatedUser = await Seller.findByIdAndUpdate(
+  //   req.user.id,
+  //   filteredBody,
+  //   {
+  //     new: true,
+  //     runValidators: true,
+  //   }
+  // );
+
 
   res.status(200).json({
     status: "success",
     data: {
-      user: updatedUser,
+      user: update,
     },
   });
 });

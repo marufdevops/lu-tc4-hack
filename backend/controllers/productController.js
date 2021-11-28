@@ -5,7 +5,7 @@ const Seller = require("../models/sellerModel");
 const AppError = require("../utils/AppError");
 const schedule = require("node-schedule");
 const multermiddlewares = require("../middlewares/multermiddleware");
-
+const fs = require('fs')
 //Cron job
 schedule.scheduleJob("0 0 1 * *", async () => {
   await Seller.updateMany(
@@ -56,31 +56,52 @@ exports.getAProduct = catchAsync(async (req, res, next) => {
 
 //Create a new product
 exports.createAProduct = catchAsync(async (req, res, next) => {
-  const seller = await Seller.findById(req.user.id);
-  if (seller.accountType === "free") {
-    if (seller.max >= 10) {
-      return next(
-        new AppError("you have exceeded your limit for this month", 400)
-      );
-    }
+  console.log(req.user)
+  try {
+    const seller = await Seller.findById(req.user.id);
+    // if (seller.accountType === "free") {
+    //   if (seller.max >= 10) {
+    //     return next(
+    //       new AppError("you have exceeded your limit for this month", 400)
+    //     );
+    //   }
+    // }
+
+    const curMax = seller.max + 1;
+    const sellerx = await Seller.findByIdAndUpdate(req.user.id, {
+      $set: { max: curMax },
+    })
+    console.log(req.body);;
+    let base64Image = req.body.photo.split(';base64,').pop();
+
+    const { productName,
+      category,
+      productDetails,
+      startingBid,
+      productCondition,
+      auctionDeadline } = req.body
+    const newProduct = await Product.create({
+      productName,
+      category,
+      productDetails,
+      startingBid,
+      productCondition,
+      auctionDeadline,
+      _sellerId: req.user.id,
+      // photo: `product-${newProduct._id}.jpg`,
+      sellerAccountType: seller.accountType,
+      startingBid: req.body.startingBid,
+
+      sellerName: req.user.firstName,
+
+    });
+    fs.writeFile(`./img/products/${newProduct.id}.jpg`, base64Image, 'base64', function (err) {
+      console.log(err);
+    });
+  } catch (err) {
+    console.log(err);
   }
 
-  const curMax = seller.max + 1;
-  const sellerx = await Seller.findByIdAndUpdate(req.user.id, {
-    $set: { max: curMax },
-  });
-
-  const newProduct = await Product.create({
-    ...req.body,
-    _sellerId: req.user.id,
-
-    sellerAccountType: seller.accountType,
-    startingBid: req.body.startingBid,
-    photo: req.file ? req.file.filename : "productDefault.jpg",
-
-    sellerName: req.user.firstName,
-
-  });
   res.status(201).json({
     message: "successful",
     data: {
@@ -209,6 +230,7 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
+  console.log(req.body)
   // // 1) Create error if user POSTs password data
   // if (req.body.password || req.body.passwordConfirm) {
   //   return next(
