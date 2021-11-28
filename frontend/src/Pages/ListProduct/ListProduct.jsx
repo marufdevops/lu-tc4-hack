@@ -7,7 +7,14 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import axios from '../../Helper/axios'
 import { useHistory } from "react-router-dom"
-
+const getBase64 = (file, cb) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
 const categories = ['Electronics & Accessories', 'Collectibles & Art', 'Toys & Hobbies', 'Fashion', 'Sporting Goods', 'Health & Beauty', 'Books, Movies & Music', 'Home & Garden']
 const ListProduct = () => {
   let history = useHistory()
@@ -24,8 +31,9 @@ const ListProduct = () => {
   const [profName, setProfName] = useState("")
   const [timeState, setTimeState] = useState("")
   const [productCategory, setProductCategory] = useState(categories[0])
+  const [productImage, setProductImage] = useState("")
   const formRef = useRef();
-  const handleChange = (event, type) => {
+  const handleChange = async (event, type) => {
     switch (type) {
       case "productName":
         setProductName(event.target.value)
@@ -39,6 +47,8 @@ const ListProduct = () => {
       case "startingBid":
         setStartingBid(event.target.value)
         break;
+      case "productImage":
+        setProductImage(await getBase64(event.target.files[0]))
       default:
         break;
     }
@@ -52,10 +62,9 @@ const ListProduct = () => {
 
 
 
-  const paymentButton = useRef()
   const confirmButton = useRef()
   useEffect(() => {
-    confirmButton.current.disabled = true
+    confirmButton.current.disabled = false
     const dt = new Date();
     dt.setMonth(dt.getMonth() + 1)
     setMaxDate(dt)
@@ -63,25 +72,29 @@ const ListProduct = () => {
   }, [])
 
 
-  const makePayment = () => {
-    confirmButton.current.disabled = false;
-    paymentButton.current.disabled = true;
-    paymentButton.current.innerText = "Payment Done"
 
-  }
 
-  const confirmAppointment = (event) => {
+  const setAuction = (event) => {
     if (formRef.current.reportValidity()) {
       event.preventDefault();
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
       const day = date.getDate();
+      const array = productCategory.split(" & ")
+      let stringCategory = ""
+      for (let i = 0; i < array.length; i++) {
+        stringCategory += array[i].toLowerCase()
+        if (i < array.length - 1) {
+          stringCategory += "-"
+        }
+      }
       const body = {
         productName,
-        category: productCategory,
+        category: stringCategory,
         productDetails: productDescription,
-        startingBid,
+        startingBid: parseInt(startingBid),
         productCondition: condition,
+        photo: productImage,
         auctionDeadline: day + "/" + month + "/" + year,
       }
       axios.post("/api/products", body)
@@ -121,6 +134,11 @@ const ListProduct = () => {
                 <TextField required="true" onChange={(event) => { handleChange(event, "startingBid") }} className={styles.textField} id="standard-basic" type="number" label="Starting Bid" variant="outlined" />
 
               </div>
+              <input
+                style={{ marginTop: '20px' }}
+                type="file"
+                onChange={(event) => { handleChange(event, "productImage") }}
+              />
               <div
                 className={styles.datePicker}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -137,12 +155,11 @@ const ListProduct = () => {
             </div>
 
             <div className={styles.appointmentBtn}>
-              <button ref={paymentButton} onClick={makePayment} className={styles.makePayment} >Make Payment</button>
-              <button ref={confirmButton} onClick={confirmAppointment} className={styles.confirm} >Confirm Appointment</button>
+              <button ref={confirmButton} onClick={setAuction} className={styles.confirm} >Set Up Auction</button>
             </div>
 
 
-            {/* <Button className={styles.btn} onClick={submit} variant="contained" endIcon={<DoubleArrowIcon />}>Submit</Button> */}
+
           </form>
         </Card>
       </div>
