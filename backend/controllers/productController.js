@@ -49,7 +49,7 @@ exports.getAProduct = catchAsync(async (req, res, next) => {
     data: {
       product,
       seller,
-      userId: req.user.id
+      userId: req.user.id,
     },
   });
 });
@@ -79,7 +79,6 @@ exports.createAProduct = catchAsync(async (req, res, next) => {
     photo: req.file ? req.file.filename : "productDefault.jpg",
 
     sellerName: req.user.firstName,
-
   });
   res.status(201).json({
     message: "successful",

@@ -3,6 +3,7 @@ const cors = require("cors");
 const userRouter = require("./routes/userRoutes");
 const approvalRouter = require("./routes/approvalRoutes");
 const productRouter = require("./routes/productRoutes");
+const adminRouter = require("./routes/adminRoutes");
 const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 
@@ -24,15 +25,20 @@ app.use(express.static("img/products"));
 // });
 
 app.use(function (req, res, next) {
-
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
 
   next();
 });
-app.options('/*', (_, res) => {
+app.options("/*", (_, res) => {
   res.sendStatus(200);
 });
 
@@ -40,6 +46,7 @@ app.options('/*', (_, res) => {
 app.use("/api/users", userRouter);
 app.use("/api/approvals", approvalRouter);
 app.use("/api/products", productRouter);
+app.use("/api/admin", adminRouter);
 
 //Error Handling for all undefined routes
 app.all("*", (req, res, next) => {
