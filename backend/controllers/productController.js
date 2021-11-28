@@ -49,7 +49,7 @@ exports.getAProduct = catchAsync(async (req, res, next) => {
     data: {
       product,
       seller,
-      userId: req.user.id
+      userId: req.user.id,
     },
   });
 });
@@ -102,12 +102,13 @@ exports.createAProduct = catchAsync(async (req, res, next) => {
     console.log(err);
   }
 
-  res.status(201).json({
-    message: "successful",
-    data: {
-      newProduct,
-    },
-  });
+  sellerName: req.user.firstName,
+    res.status(201).json({
+      message: "successful",
+      data: {
+        newProduct,
+      },
+    });
 });
 
 exports.upvoteAProduct = catchAsync(async (req, res, next) => {
