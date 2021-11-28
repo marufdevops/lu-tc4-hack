@@ -1,0 +1,194 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/logoKuthir.png" type="image/x-icon">
+    <title>Kuthir</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/logoKuthir.png" alt="" width="30" height="24" class="d-inline-block align-text-top" /> কুটির
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="community.html">Community</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <a href="ProductListing.html" class="btn btn-primary">Search</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main -->
+
+    <div class="row container mt-2">
+        <h2>Product Details</h2>
+    </div>
+
+
+    <!--Section: Block Content-->
+    <section class="mb-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <div class="row product-gallery mx-1">
+
+                        <div class="col-12 mb-0">
+                            <figure class="view overlay rounded z-depth-1 main-img">
+                                <a href="img/woodenUtensil.jpg" data-size="710x823">
+                                    <img src="img/woodenUtensil.jpg" class="img-fluid z-depth-1">
+                                </a>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <h5>কাঠের বাসনবাটি</h5>
+                <p class="mb-2 text-muted text-uppercase small">বাসনবাটি</p>
+                <ul class="rating">
+                    <li>
+                        <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                    <li>
+                        <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                    <li>
+                        <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                    <li>
+                        <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                    <li>
+                        <i class="far fa-star fa-sm text-primary"></i>
+                    </li>
+                </ul>
+                <p><span class="mr-1"><strong>$12.99</strong></span></p>
+                <p class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio, officia quis dolore quos sapiente tempore alias.</p>
+                <div class="table-responsive">
+                    <table class="table table-sm table-borderless mb-0">
+                        <tbody>
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Model</strong></th>
+                                <td>Shirt 5407X</td>
+                            </tr>
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Color</strong></th>
+                                <td>Black</td>
+                            </tr>
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Delivery</strong></th>
+                                <td>USA, Europe</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="table-responsive mb-2">
+                    <table class="table table-sm table-borderless">
+                        <tbody>
+                            <tr>
+                                <td class="pl-0 pb-0 w-25">Quantity</td>
+                                <td class="pb-0">Select size</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-0">
+                                    <div class="def-number-input number-input safari_only mb-0">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+                                        <input class="quantity" min="0" name="quantity" value="1" type="number">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mt-1">
+                                        <div class="form-check form-check-inline pl-0">
+                                            <input type="radio" class="form-check-input" id="small" name="materialExampleRadios" checked>
+                                            <label class="form-check-label small text-uppercase card-link-secondary" for="small">Small</label>
+                                        </div>
+                                        <div class="form-check form-check-inline pl-0">
+                                            <input type="radio" class="form-check-input" id="medium" name="materialExampleRadios">
+                                            <label class="form-check-label small text-uppercase card-link-secondary" for="medium">Medium</label>
+                                        </div>
+                                        <div class="form-check form-check-inline pl-0">
+                                            <input type="radio" class="form-check-input" id="large" name="materialExampleRadios">
+                                            <label class="form-check-label small text-uppercase card-link-secondary" for="large">Large</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-2">Current highest bid</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="text-muted mb-0">600 tk</p>
+                    </div>
+                </div>
+                <form class="row g-3">
+                    <div class="col-auto">
+                        <label for="inputPassword2" class="visually-hidden">Password</label>
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Amount in tk">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Place Bid</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </section>
+    <!--Section: Block Content-->
+
+
+
+    <!-- Footer -->
+    <footer class="text-center text-white fixed-bottom" style="background-color: #f1f1f1">
+        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            কুটির - Emphasising on our culture
+        </div>
+    </footer>
+
+    <script src="bundle.js"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.0/mdb.min.js"></script>
+</body>
+
+</html>
