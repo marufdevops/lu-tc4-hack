@@ -1,28 +1,29 @@
 {
-  "name": "lu-tc4-hack",
-  "version": "1.0.0",
-  "description": "Before you start working, just to let you know we strive for quality. It means you can use any language, tools, third party services/api, any architecture to show your skills. We will provide requirements that you have to meet to pass, but you can code extra features if you want. Keep in mind don't overdo for the sake of it, prefer high-quality mandatory requirements over many optional features with lower quality.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/anindo9185/lu-tc4-hack.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/anindo9185/lu-tc4-hack/issues"
-  },
-  "homepage": "https://github.com/anindo9185/lu-tc4-hack#readme",
-  "devDependencies": {
-    "webpack": "^5.64.4",
-    "webpack-cli": "^4.9.1"
-  },
-  "dependencies": {
-    "firebase": "^9.5.0"
-  }
+    "name": "lu-tc4-hack",
+    "version": "1.0.0",
+    "description": "Before you start working, just to let you know we strive for quality. It means you can use any language, tools, third party services/api, any architecture to show your skills. We will provide requirements that you have to meet to pass, but you can code extra features if you want. Keep in mind don't overdo for the sake of it, prefer high-quality mandatory requirements over many optional features with lower quality.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/anindo9185/lu-tc4-hack.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/anindo9185/lu-tc4-hack/issues"
+    },
+    "homepage": "https://github.com/anindo9185/lu-tc4-hack#readme",
+    "devDependencies": {
+        "html-webpack-plugin": "^3.2.0",
+        "webpack": "^5.64.4",
+        "webpack-cli": "^4.9.1"
+    },
+    "dependencies": {
+        "firebase": "^9.5.0"
+    }
 }
