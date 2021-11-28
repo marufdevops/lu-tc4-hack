@@ -1,0 +1,118 @@
+const Customer = require("../models/customerModel");
+const Product = require("../models/productModel");
+const Bid = require("../models/bidModel");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/AppError");
+
+exports.getAllCustomer = catchAsync(async (req, res, next) => {
+  const customers = await Customer.find();
+  res.status(200).json({
+    message: "successful",
+    No_of_Customers: customers.length,
+    data: {
+      customers,
+    },
+  });
+});
+
+//Find A single Customer
+exports.getACustomer = catchAsync(async (req, res, next) => {
+  const customer = await Customer.findById(req.user.id).populate({
+    path: "bids",
+    select: "bid _productId _sellerId productName sellerName",
+  });
+  const upvotes_length = customer.upvotes.length;
+  const downvotes_length = customer.downvotes.length;
+
+  const total = upvotes_length * 1 + downvotes_length * 1;
+
+  const buyer = await Customer.findByIdAndUpdate(req.user.id, {
+    $set: { active_points: total },
+  });
+
+  res.status(200).json({
+    message: "successful",
+    data: {
+      customer,
+    },
+  });
+});
+
+//update customer info
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
+exports.updateProfileInfo = catchAsync(async (req, res, next) => {
+  // console.log(req.body);
+  // const filteredBody = filterObj(
+  //   req.body,
+  //   "firstName",
+  //   "lastName",
+  //   "phone",
+  //   "password"
+  // );
+
+  // console.log(req.user);
+  // const updatedUser = await Customer.findByIdAndUpdate(
+  //   req.user.id,
+  //   filteredBody,
+  //   {
+  //     new: true,
+  //     runValidators: true,
+  //   }
+  // );
+
+  const updatedUser = await Customer.findByIdAndUpdate(req.user.id, {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    phone: req.body.phone,
+    password: req.body.password,
+  });
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: updatedUser,
+    },
+  });
+});
+
+exports.bidAProduct = catchAsync(async (req, res, next) => {
+  // const productId = req.params.id;
+  // const userId = req.user.id;
+  const product = await Product.findById(req.params.id);
+  const isBid = product.allBids && product.allBids.includes(req.user.id);
+
+  let option;
+  if (!isBid) {
+    option = "$addToSet";
+  } else {
+    return next(new AppError("You've already bid on this product", 400));
+  }
+  await Product.findByIdAndUpdate(
+    product._id,
+    {
+      [option]: { allBids: req.user.id },
+      $set: { maxBid: req.body.bid },
+    },
+    { new: true }
+  );
+
+  const newBid = Bid.create({
+    _sellerId: product._sellerId,
+    sellerName: product.sellerName,
+    _bidderId: req.user.id,
+    _productId: product._id,
+    productName: product.productName,
+    bid: req.body.bid,
+  });
+  res.status(201).json({
+    message: "success",
+    data: {
+      newBid,
+    },
+  });
+});

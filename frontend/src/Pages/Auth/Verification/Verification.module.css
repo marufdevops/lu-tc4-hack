@@ -1,0 +1,72 @@
+.mainDiv {
+  height: 100vh;
+}
+.mainSignUpDiv {
+  display: flex;
+  justify-content: center;
+  background-color: #def6ff;
+  width: 100%;
+}
+.signUpDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  height: fit-content;
+  margin: auto;
+  padding: 30px;
+  background-color: white;
+  color: black;
+  margin-top: 200px;
+  margin-bottom: 37px;
+  border-radius: 20px;
+}
+
+.signUpText {
+  text-transform: uppercase;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 42px !important;
+  line-height: 75px;
+  margin-top: 0px !important;
+  margin-bottom: 40px !important;
+  text-align: center;
+  color: skyblue;
+}
+
+.textField {
+  width: 70%;
+  margin-bottom: 20px !important;
+}
+.radioDiv {
+  width: 70%;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  padding: 7px 20px 7px 20px !important;
+  font-family: "Poppins" !important;
+  font-size: 18px !important;
+  background-color: #40b8e5 !important;
+}
+
+.signUpLink {
+  color: #40b8e5 !important;
+}
+
+.nidImageInput {
+  padding: 7px 20px 7px 20px !important;
+  font-family: "Poppins" !important;
+  font-size: 18px !important;
+  background-color: #40b8e5 !important;
+  border: none;
+  border-radius: 5px;
+}
+
+.nidImageInput:focus {
+  outline: none;
+}
+.imageInputs {
+  margin-bottom: 15px;
+}
