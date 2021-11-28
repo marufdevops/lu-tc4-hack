@@ -22,7 +22,7 @@ const auth = getAuth();
 
 
 //Recaptcha
-window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {}, auth);
+window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', auth);
 
 recaptchaVerifier.render().then(widgetId => {
     window.recaptchaWidgetId = widgetId;
@@ -83,9 +83,9 @@ signupForm.addEventListener('submit', (e) => {
     signInWithPhoneNumber(auth, phoneNumber, appVerifier)
         .then(confirmationResult => {
             window.confirmationResult = confirmationResult;
-            // const sentCodeId = confirmationResult.verificationId;
-            // let verify = document.querySelector("#verify-btn");
-            // verify.addEventListener('click', () => signInWithPhone(sentCodeId));
+            const sentCodeId = confirmationResult.verificationId;
+            let verify = document.querySelector("#verify-btn");
+            verify.addEventListener('click', () => signInWithPhone(sentCodeId));
         });
 
     const signInWithPhone = sentCodeId => {
@@ -102,7 +102,7 @@ signupForm.addEventListener('submit', (e) => {
             })
     }
 
-    document.location.href = "./OTP.html";
+    // document.location.href = "./OTP.html";
 
 })
 
